@@ -27,6 +27,7 @@ export class MovielistComponent implements OnInit {
     });
 
     this.currentPage = page;
+    window.scroll(0,0);
   }
 
 }
