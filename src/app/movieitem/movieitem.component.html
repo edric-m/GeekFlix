@@ -1,5 +1,5 @@
 <nz-card nzHoverable style="width:240px" [nzCover]="coverTemplate">
-    <nz-card-meta [nzTitle]="name" [nzDescription]="description"></nz-card-meta>
+    <nz-card-meta [nzTitle]="name" [nzDescription]="description | slice:0:100"></nz-card-meta>
 </nz-card>
 <ng-template #coverTemplate>
     <img alt="example" [src]="imagePrefix + imageFile" />

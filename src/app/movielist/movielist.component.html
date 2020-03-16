@@ -11,3 +11,9 @@
         </div>
     </div>
 </div>
+<nz-pagination 
+    [nzPageIndex]="currentPage" 
+    [nzPageSize]="20" 
+    [nzTotal]="totalResults"
+    (nzPageIndexChange)="getPage($event)">
+</nz-pagination>

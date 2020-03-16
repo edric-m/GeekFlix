@@ -22,4 +22,10 @@ describe('MovieitemComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  //test case when image not loaded that it should fill the same space and replace image
+
+  //test case when title not loaded it should fill the same space
+
+  //test case when description not loaded it should fill the same space
 });
