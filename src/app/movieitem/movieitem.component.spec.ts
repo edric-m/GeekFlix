@@ -28,4 +28,6 @@ describe('MovieitemComponent', () => {
   //test case when title not loaded it should fill the same space
 
   //test case when description not loaded it should fill the same space
+
+  //test for any missing fields
 });

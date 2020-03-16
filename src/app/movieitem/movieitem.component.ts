@@ -16,4 +16,8 @@ export class MovieitemComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  itemClick() {
+    console.log("item clicked");
+  }
+
 }

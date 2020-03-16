@@ -22,4 +22,12 @@ describe('MovielistComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  //test when movie count is less than 20
+
+  //test when no data is loaded
+
+  //test when alignment is off?
+
+  //test that element is of a specific size
 });

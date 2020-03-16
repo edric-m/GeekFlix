@@ -1,1 +1,25 @@
-<p>moviepage works!</p>
+<nz-layout>
+    <nz-header><h1 class="title">{{ movieTitle }}</h1></nz-header>
+    <nz-layout>
+      <nz-content class="content">
+        <div class="poster-container">
+            <img class="poster" alt="example" [src]="imagePrefix + movieImage" />
+        </div>
+        <div>
+            <p>{{ movieDescription }}</p>
+        </div>
+      </nz-content>
+    </nz-layout>
+    <nz-footer>
+        <h2>Related</h2>
+        <div *ngFor="let movie of relatedMovies | slice:0:6" nz-col class="gutter-row" nzSpan="4">
+            <div class="gutter-box">
+                <app-movieitem 
+                    [name]="movie.original_title" 
+                    [description]="movie.overview" 
+                    [image]="movie.poster_path">
+                </app-movieitem>
+            </div>
+        </div>
+    </nz-footer>
+  </nz-layout>

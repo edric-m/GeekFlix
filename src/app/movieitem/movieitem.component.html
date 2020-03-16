@@ -1,4 +1,4 @@
-<nz-card nzHoverable style="width:240px" [nzCover]="coverTemplate">
+<nz-card nzHoverable style="width:240px" [nzCover]="coverTemplate" (click)="itemClick()">
     <nz-card-meta [nzTitle]="name" [nzDescription]="description | slice:0:100"></nz-card-meta>
 </nz-card>
 <ng-template #coverTemplate>

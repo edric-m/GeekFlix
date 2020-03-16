@@ -16,6 +16,7 @@
         [nzPageIndex]="currentPage" 
         [nzPageSize]="20" 
         [nzTotal]="totalResults"
-        (nzPageIndexChange)="getPage($event)">
+        (nzPageIndexChange)="getPage($event)"
+        nzShowQuickJumper>
     </nz-pagination>
 </div>
