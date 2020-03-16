@@ -3,7 +3,7 @@
 }
 
 .poster-container {
-    width: 22%;
+    width: 21%;
     float: left;
     padding: 10px;
 }
@@ -27,5 +27,5 @@
 }
 
 nz-select {
-    width: 25%;
+    width: 40%;
   }

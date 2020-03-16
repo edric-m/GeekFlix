@@ -1,6 +1,9 @@
-<nz-card nzHoverable style="width:240px" [nzCover]="coverTemplate" (click)="itemClick()">
-    <nz-card-meta [nzTitle]="name" [nzDescription]="description | slice:0:100"></nz-card-meta>
+<nz-card nzHoverable style="width:240px" [nzCover]="coverTemplate" [nzExtra]="extraTemplate">
+    <nz-card-meta [nzTitle]="name" [nzDescription]="description | slice:0:100" (click)="itemClick()"></nz-card-meta>
 </nz-card>
 <ng-template #coverTemplate>
-    <img alt="example" [src]="imagePrefix + imageFile" />
+    <img alt="example" [src]="imagePrefix + imageFile" (click)="itemClick()"/>
+</ng-template>
+<ng-template #extraTemplate>
+    <button nz-button nzGhost nzType="danger" (click)="removeItem()">Delete</button>
 </ng-template>

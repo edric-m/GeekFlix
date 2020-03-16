@@ -12,6 +12,7 @@ export class MovielistComponent implements OnInit {
   movielist: Movie[] = [];
   currentPage: number = 1;
   totalResults: number = 1;
+  removedMovies: number[] = [];
 
   constructor(private getListService: GetlistService) { }
 
@@ -23,7 +24,11 @@ export class MovielistComponent implements OnInit {
     this.getListService.getPage(page).subscribe((movies) => {
       this.totalResults = movies.totalResults;
       this.movielist = movies.results;
-      console.log(movies);
+      this.removedMovies = JSON.parse(localStorage.getItem('removed'));
+      if (this.removedMovies === null) {
+        this.removedMovies = [];
+      }
+      console.log(this.removedMovies);
     });
 
     this.currentPage = page;

@@ -25,4 +25,18 @@ export class MovieitemComponent implements OnInit {
     this.router.navigate(['/movie/' + this.id + '/' + linkName]);
   }
 
+  removeItem() {
+    if (confirm("Delete '" + this.name + "' from the list?")) {
+      if(localStorage.getItem('removed') === null) {
+        localStorage.setItem('removed', JSON.stringify([this.id]));
+      }
+      else {
+        let removedItems = JSON.parse(localStorage.getItem('removed'));
+        removedItems.push(this.id); //TODO: this pushes duplicates
+        localStorage.setItem('removed', JSON.stringify(removedItems));
+      }
+      location.reload(); //TODO: this is no good because it requires calling the server again (not reactive or SPA), need to bind the event to parent
+    }
+     
+  }
 }
