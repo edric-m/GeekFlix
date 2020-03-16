@@ -1,25 +1,32 @@
 <nz-layout>
-    <nz-header><h1 class="title">{{ movieTitle }}</h1></nz-header>
+    <nz-header><h1 class="title" nz-title>{{ movieTitle }}</h1></nz-header>
     <nz-layout>
       <nz-content class="content">
         <div class="poster-container">
             <img class="poster" alt="example" [src]="imagePrefix + movieImage" />
         </div>
-        <div>
+        <div class="movie-description">
             <p>{{ movieDescription }}</p>
         </div>
       </nz-content>
     </nz-layout>
     <nz-footer>
-        <h2>Related</h2>
+        <h2 nz-title>Related</h2>
         <div *ngFor="let movie of relatedMovies | slice:0:6" nz-col class="gutter-row" nzSpan="4">
             <div class="gutter-box">
                 <app-movieitem 
                     [name]="movie.original_title" 
                     [description]="movie.overview" 
-                    [image]="movie.poster_path">
+                    [image]="movie.poster_path"
+                    [id]="movie.id">
                 </app-movieitem>
             </div>
+        </div>
+        <div class="center">
+            <nz-button-group [nzSize]="large">
+                <button nz-button nzType="primary"><i nz-icon nzType="left"></i>Backward</button>
+                <button nz-button nzType="primary">Forward<i nz-icon nzType="right"></i></button>
+            </nz-button-group>
         </div>
     </nz-footer>
   </nz-layout>

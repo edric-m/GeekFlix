@@ -11,6 +11,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
+import { Routes, RouterModule } from '@angular/router';
+
+const appRoutes: Routes = [
+  { path: 'movielist', component: MovielistComponent },
+  { path: 'movie/:id/:name', component: MoviepageComponent }
+];
 
 registerLocaleData(en);
 
@@ -27,6 +33,7 @@ registerLocaleData(en);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movieitem',
@@ -10,14 +11,17 @@ export class MovieitemComponent implements OnInit {
   @Input('description') description: string;
   imagePrefix: string = "https://image.tmdb.org/t/p/w1280";
   @Input('image') imageFile: string;// = "/iZf0KyrE25z1sage4SYFLCCrMi9.jpg"; //link
+  @Input('id') id: number;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
   itemClick() {
-    console.log("item clicked");
+    let linkName = this.name.replace(/ /g, '_');
+    //console.log(linkName);
+    this.router.navigate(['/movie/' + this.id + '/' + linkName]);
   }
 
 }
