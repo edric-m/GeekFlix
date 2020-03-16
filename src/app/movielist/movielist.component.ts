@@ -14,19 +14,10 @@ export class MovielistComponent implements OnInit {
   constructor(private getListService: GetlistService) { }
 
   ngOnInit(): void {
-    this.getListService.getPage();
-
-    setTimeout(() => {
-      let x: Movie[] = this.getListService.loadedmovies;
-      for (let movie of x) {
-        this.movielist.push({ 
-          poster_path: movie.poster_path, 
-          id: movie.id, 
-          original_title: movie.original_title, 
-          overview: movie.overview 
-        });
-      }
-    },1000);
+    this.getListService.getPage().subscribe((movies) => {
+      this.movielist = movies;
+      //console.log(this.loadedmovies);
+    });
   }
 
 }

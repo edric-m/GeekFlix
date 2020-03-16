@@ -16,23 +16,14 @@ export class GetlistService {
   constructor(private http: HttpClient) { }
 
   getPage() {
-    this.getList();
+    return this.getList();
   }
 
   private getList() {
-    this.http
+    return this.http
       .get(this.listURL + this.page + this.genre)
       .pipe(map((responseData: Page )  => {
-        //const dataArray = [];
-        //for (const movie in responseData.results) {
-        //  dataArray.push({ movie });
-        //}
-        //return dataArray;
         return responseData.results;
-      }))
-      .subscribe((movies) => {
-        this.loadedmovies = movies;
-        console.log(this.loadedmovies);
-      });
+      }));
   }
 }
