@@ -15,18 +15,39 @@ export class MoviepageComponent implements OnInit {
   relatedMovies: Movie[];
   imagePrefix: string = "https://image.tmdb.org/t/p/w1280";
 
+  listOfOption = [
+    'angry','dizzy','flushed','frown','frown-open','grimace','grin',
+    'grin-alt','grin-beam','grin-beam-sweat','grin-hearts','grin-squint','grin-squint-tears',
+    'grin-stars','grin-tears','grin-tongue','grin-tongue-wink','grin-wink','kiss','kiss-heart',
+    'kiss-wink-heart','laugh','laugh-beam','laugh-squint','laugh-wink','meh','meh-blank',
+    'meh-rolling-eyes','sad-cry','sad-tear','smile','smile-beam','smile-wink','surprise','tired'];
+  listOfSelectedValue = [];
+  defaultOption = [...this.listOfSelectedValue];
+  selectedValue = 'Default';
+
   constructor(private getListService: GetlistService,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.listOfSelectedValue = JSON.parse(localStorage.getItem(this.route.snapshot.params['id']));
     this.getMovie(this.route.snapshot.params['id']);
     this.route.params
       .subscribe(
         (params: Params) => {
           this.getMovie(params['id']);
+          this.listOfSelectedValue = JSON.parse(localStorage.getItem(this.route.snapshot.params['id']));
           window.scroll(0,0); //scroll to top of page
         }
       );
+  }
+
+  emotionAdded() {
+    let emotions = [];
+    for(let emotion of this.listOfSelectedValue) {
+      emotions.push(emotion);
+    }
+    //console.log(JSON.parse(JSON.stringify(emotions)));
+    localStorage.setItem(this.route.snapshot.params['id'], JSON.stringify(emotions));
   }
 
   getMovie(movieId: number) {

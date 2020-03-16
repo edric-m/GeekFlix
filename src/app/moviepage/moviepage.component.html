@@ -8,6 +8,22 @@
         <div class="movie-description">
             <p>{{ movieDescription }}</p>
         </div>
+
+        <nz-select 
+            nzMode="multiple" 
+            nzPlaceHolder="select emotions" 
+            [(ngModel)]="listOfSelectedValue" 
+            (ngModelChange)="emotionAdded()">
+            <nz-option *ngFor="let option of listOfOption" [nzLabel]="option" [nzValue]="option"></nz-option>
+            <nz-option *ngFor="let option of defaultOption" [nzLabel]="option" [nzValue]="option" nzHide></nz-option>
+        </nz-select>
+          <!-- <br />
+          <br />
+          <nz-select [(ngModel)]="selectedValue">
+            <nz-option *ngFor="let option of listOfOption" [nzLabel]="option" [nzValue]="option"></nz-option>
+            <nz-option nzLabel="Default Value" nzValue="Default" nzHide></nz-option>
+          </nz-select> -->
+
       </nz-content>
     </nz-layout>
     <nz-footer>
@@ -22,11 +38,11 @@
                 </app-movieitem>
             </div>
         </div>
-        <div class="center">
+        <!-- <div class="center">
             <nz-button-group [nzSize]="large">
                 <button nz-button nzType="primary"><i nz-icon nzType="left"></i>Backward</button>
                 <button nz-button nzType="primary">Forward<i nz-icon nzType="right"></i></button>
             </nz-button-group>
-        </div>
+        </div> -->
     </nz-footer>
   </nz-layout>

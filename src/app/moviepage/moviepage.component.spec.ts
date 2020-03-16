@@ -22,4 +22,10 @@ describe('MoviepageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  //test data loaded
+
+  //test placeholders when no data loaded
+
+  //test 'related' title disappears when no data loaded
 });

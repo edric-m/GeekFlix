@@ -3,8 +3,9 @@
 }
 
 .poster-container {
-    width: 20%;
+    width: 22%;
     float: left;
+    padding: 10px;
 }
 
 .poster {
@@ -24,3 +25,7 @@
 .movie-description {
     padding: 10px;
 }
+
+nz-select {
+    width: 25%;
+  }

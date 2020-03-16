@@ -30,4 +30,8 @@ describe('MovieitemComponent', () => {
   //test case when description not loaded it should fill the same space
 
   //test for any missing fields
+
+  //test space is removed from title when card is clicked
+
+  //test '/' is removed from title when card is clicked
 });
