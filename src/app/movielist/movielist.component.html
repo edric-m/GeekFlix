@@ -2,7 +2,7 @@
     <div nz-row nzGutter="16">
         <div *ngFor="let movie of movielist" nz-col class="gutter-row" nzSpan="6">
             <div class="gutter-box">
-                <app-movieitem></app-movieitem>
+                <app-movieitem [name]="movie.original_title" [description]="movie.overview" [image]="movie.poster_path"></app-movieitem>
             </div>
         </div>
     </div>
