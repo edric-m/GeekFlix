@@ -44,12 +44,16 @@ export class GetlistService {
       let filteredList = [];
       let removedItems: number[] = JSON.parse(localStorage.getItem('removed'));
       for(let movie of responseData.results) {
-        if(!removedItems.includes(movie.id)) {
-          filteredList.push(movie);
+        if(removedItems != null) {
+          if(!removedItems.includes(movie.id)) {
+            filteredList.push(movie);
+          }
+        } else {
+          filteredList = responseData.results;
         }
       }
 
-      return { totalResults: responseData.total_results-removedItems.length, results: filteredList };
+      return { totalResults: responseData.total_results, results: filteredList };
       //console.log(this.listResults);
     }));
   }
