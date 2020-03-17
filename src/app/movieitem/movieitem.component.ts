@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { GetlistService } from '../getlist.service';
 
 @Component({
   selector: 'app-movieitem',
@@ -13,7 +14,8 @@ export class MovieitemComponent implements OnInit {
   @Input('image') imageFile: string;// = "/iZf0KyrE25z1sage4SYFLCCrMi9.jpg"; //link
   @Input('id') id: number;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, 
+              private getListService: GetlistService) {}
 
   ngOnInit(): void {
   }
@@ -27,16 +29,8 @@ export class MovieitemComponent implements OnInit {
 
   removeItem() {
     if (confirm("Delete '" + this.name + "' from the list?")) {
-      if(localStorage.getItem('removed') === null) {
-        localStorage.setItem('removed', JSON.stringify([this.id]));
-      }
-      else {
-        let removedItems = JSON.parse(localStorage.getItem('removed'));
-        removedItems.push(this.id); //TODO: this pushes duplicates
-        localStorage.setItem('removed', JSON.stringify(removedItems));
-      }
-      location.reload(); //TODO: this is no good because it requires calling the server again (not reactive or SPA), need to bind the event to parent
+      //this.getListService.removeMovie(this.id);
+      //this.getListService.getPage(5);
     }
-     
   }
 }

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { GetlistService } from '../getlist.service';
 import { Movie } from '../movie.model';
+//import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-movielist',
   templateUrl: './movielist.component.html',
-  styleUrls: ['./movielist.component.css'],
+  styleUrls: ['./movielist.component.css']
   //providers: [GetlistService]
 })
 export class MovielistComponent implements OnInit {
@@ -18,17 +19,28 @@ export class MovielistComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPage(this.currentPage);
+    // const listObservable = Observable.create(observer => {
+    //   setInterval( () => {
+    //     observer.next(this.getListService.listResults);
+    //   }, 1000);
+    // });
+
+    // listObservable.subscribe(data => {
+    //   console.log(data);
+    // });
   }
 
   getPage(page: number) {
-    this.getListService.getPage(page).subscribe((movies) => {
+    this.getListService.getPage(page);
+    this.getListService.listResults.subscribe((movies: { totalResults: number; results: Movie[] }) => {
       this.totalResults = movies.totalResults;
       this.movielist = movies.results;
       this.removedMovies = JSON.parse(localStorage.getItem('removed'));
       if (this.removedMovies === null) {
         this.removedMovies = [];
       }
-      console.log(this.removedMovies);
+      //console.log(this.removedMovies);
+      console.log(this.totalResults);
     });
 
     this.currentPage = page;
