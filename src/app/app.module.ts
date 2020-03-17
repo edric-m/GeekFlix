@@ -12,7 +12,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { Routes, RouterModule } from '@angular/router';
-import { GetlistService } from './getlist.service';
 
 const appRoutes: Routes = [
   { path: '', component : MovielistComponent }, //how to make default path with the right url?
@@ -37,7 +36,7 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [GetlistService, { provide: NZ_I18N, useValue: en_US }],
+  providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

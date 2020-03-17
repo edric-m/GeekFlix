@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { GetlistService } from './getlist.service';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +7,4 @@ import { GetlistService } from './getlist.service';
 })
 export class AppComponent {
   title = 'GeekFlix';
-
-  constructor(private getListService: GetlistService) { }
 }

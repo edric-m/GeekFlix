@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Page } from './list.model';
 import { Movie } from './movie.model';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +16,13 @@ export class GetlistService {
   genre: string = "&with_genres=878";
 
   //listObservable: Observable;
-  listResults: Observable<{ totalResults: number, results: Movie[] }>;
+  //listResults: Observable<{ totalResults: number, results: Movie[] }>;
 
   constructor(private http: HttpClient) { }
 
   getPage(page: number) {
-    this.listResults = this.getList(page);
+    //this.listResults = this.getList(page);
+    return this.getList(page);
   }
 
   getMoviePage(movieId: number) {
@@ -34,7 +34,6 @@ export class GetlistService {
   }
 
   private getList(pageNumber: number) {
-    
     return this.http
     .get(this.listURL + this.page + pageNumber + this.genre)
     .pipe(map((responseData: Page ) => {
@@ -65,16 +64,5 @@ export class GetlistService {
   }
 
   removeMovie(id: number) {
-    // if(localStorage.getItem('removed') === null) {
-    //   localStorage.setItem('removed', JSON.stringify([id]));
-    // }
-    // else {
-    //   let removedItems = JSON.parse(localStorage.getItem('removed'));
-    //   removedItems.push(id); //TODO: this pushes duplicates
-    //   localStorage.setItem('removed', JSON.stringify(removedItems));
-    // }
-    this.listResults = this.getList(5);
-    
-    //location.reload(); //TODO: this is no good because it requires calling the server again (not reactive or SPA), need to bind the event to parent
   }
 }

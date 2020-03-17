@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { GetlistService } from '../getlist.service';
+//import { EventEmitter } from 'protractor';
 
 @Component({
   selector: 'app-movieitem',
@@ -13,9 +13,10 @@ export class MovieitemComponent implements OnInit {
   imagePrefix: string = "https://image.tmdb.org/t/p/w1280";
   @Input('image') imageFile: string;// = "/iZf0KyrE25z1sage4SYFLCCrMi9.jpg"; //link
   @Input('id') id: number;
+  
+  @Output() itemDelete = new EventEmitter<number>();
 
-  constructor(private router: Router, 
-              private getListService: GetlistService) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
   }
@@ -31,6 +32,7 @@ export class MovieitemComponent implements OnInit {
     if (confirm("Delete '" + this.name + "' from the list?")) {
       //this.getListService.removeMovie(this.id);
       //this.getListService.getPage(5);
+      this.itemDelete.emit(this.id);
     }
   }
 }

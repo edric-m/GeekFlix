@@ -1,12 +1,13 @@
 <div class="gutter-example">
     <div nz-row nzGutter="16">
         <div *ngFor="let movie of movielist" nz-col class="gutter-row" nzSpan="6">
-            <div class="gutter-box" *ngIf="!removedMovies.includes(movie.id)">
+            <div class="gutter-box">
                 <app-movieitem 
                     [name]="movie.original_title" 
                     [id]="movie.id"
                     [description]="movie.overview" 
-                    [image]="movie.poster_path">
+                    [image]="movie.poster_path"
+                    (itemDelete)="removeMovie($event)">
                 </app-movieitem>
             </div>
         </div>
