@@ -52,7 +52,7 @@ export class MovielistComponent implements OnInit {
     }
     else {
       let removedItems = JSON.parse(localStorage.getItem('removed'));
-      removedItems.push(id); //TODO: this pushes duplicates
+      removedItems.push(id); //TODO: this pushes duplicates when it shouldnt
       localStorage.setItem('removed', JSON.stringify(removedItems));
     }
 

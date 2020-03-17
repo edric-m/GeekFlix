@@ -28,4 +28,6 @@ describe('MoviepageComponent', () => {
   //test placeholders when no data loaded
 
   //test 'related' title disappears when no data loaded
+
+  //test that movie id is removed from local storage if no emotions exist
 });

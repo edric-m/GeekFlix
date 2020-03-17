@@ -37,10 +37,19 @@ export class GetlistService {
     return this.http
     .get(this.listURL + this.page + pageNumber + this.genre)
     .pipe(map((responseData: Page ) => {
-      console.log("called get list in getlistservice " + pageNumber);
+      //console.log("called get list in getlistservice " + pageNumber);
       //if page item count < 20 add from next page
-      console.log(responseData);
-      return { totalResults: responseData.total_results, results: responseData.results };
+      //console.log(responseData);
+
+      let filteredList = [];
+      let removedItems: number[] = JSON.parse(localStorage.getItem('removed'));
+      for(let movie of responseData.results) {
+        if(!removedItems.includes(movie.id)) {
+          filteredList.push(movie);
+        }
+      }
+
+      return { totalResults: responseData.total_results-removedItems.length, results: filteredList };
       //console.log(this.listResults);
     }));
   }
@@ -63,6 +72,6 @@ export class GetlistService {
       }));
   }
 
-  removeMovie(id: number) {
-  }
+  //removeMovie(id: number) { //better to do this here?
+  //}
 }

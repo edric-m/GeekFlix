@@ -47,6 +47,9 @@ export class MoviepageComponent implements OnInit {
       emotions.push(emotion);
     }
     //console.log(JSON.parse(JSON.stringify(emotions)));
+
+    //TODO: if listOfSelectedValue is empty delete this movie from local storage
+
     localStorage.setItem(this.route.snapshot.params['id'], JSON.stringify(emotions));
   }
 
