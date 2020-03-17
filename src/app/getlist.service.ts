@@ -23,6 +23,8 @@ export class GetlistService {
   getPage(page: number) {
     //this.listResults = this.getList(page);
     return this.getList(page);
+
+    //TODO: manage list here to make sure it is always 20 long. also change item count here
   }
 
   getMoviePage(movieId: number) {
@@ -41,6 +43,7 @@ export class GetlistService {
       //if page item count < 20 add from next page
       //console.log(responseData);
 
+      //TODO: move this logic up to calling function
       let filteredList = [];
       let removedItems: number[] = JSON.parse(localStorage.getItem('removed'));
       for(let movie of responseData.results) {
@@ -70,8 +73,16 @@ export class GetlistService {
   private getRelated(movieId: number) {
     return this.http
       .get(this.movieURLprefix + movieId + this.relatedURLsuffix)
-      .pipe(map(( responseData: {page: number; results: Movie[]} )  => {
+      .pipe(map(( responseData: {page: number; results: Movie[]}, key )  => {
         //console.log(responseData);
+
+        for(let movie of responseData.results){
+          let newDescription = '';
+          newDescription = localStorage.getItem(movie.id+'');
+          movie.overview = newDescription;
+          console.log(movie);
+        }
+        
         return responseData.results;
       }));
   }

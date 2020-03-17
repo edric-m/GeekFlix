@@ -13,4 +13,6 @@ describe('GetlistService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  //test that page list is always 20 items long
 });
