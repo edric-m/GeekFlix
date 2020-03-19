@@ -43,20 +43,20 @@ export class GetlistService {
       //if page item count < 20 add from next page
       //console.log(responseData);
 
-      //TODO: move this logic up to calling function
-      let filteredList = [];
-      let removedItems: number[] = JSON.parse(localStorage.getItem('removed'));
-      for(let movie of responseData.results) {
-        if(removedItems != null) {
-          if(!removedItems.includes(movie.id)) {
-            filteredList.push(movie);
-          }
-        } else {
-          filteredList = responseData.results;
-        }
-      }
+      // //TODO: move this logic up to calling function
+      // let filteredList = [];
+      // let removedItems: number[] = JSON.parse(localStorage.getItem('removed'));
+      // for(let movie of responseData.results) {
+      //   if(removedItems != null) {
+      //     if(!removedItems.includes(movie.id)) {
+      //       filteredList.push(movie);
+      //     }
+      //   } else {
+      //     filteredList = responseData.results;
+      //   }
+      // }
 
-      return { totalResults: responseData.total_results, results: filteredList };
+      return { totalResults: responseData.total_results, results: responseData.results };
       //console.log(this.listResults);
     }));
   }

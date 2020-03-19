@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MovielistComponent } from './movielist.component';
+import { GetlistService } from '../getlist.service';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('MovielistComponent', () => {
   let component: MovielistComponent;
@@ -8,7 +10,9 @@ describe('MovielistComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MovielistComponent ]
+      imports: [ HttpClientModule ],
+      declarations: [ MovielistComponent ],
+      providers: [ GetlistService ]
     })
     .compileComponents();
   }));
@@ -22,6 +26,10 @@ describe('MovielistComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // it('movielist should have exactly 20 items', () => {
+  //   expect(component.movielist.length).toEqual(20);
+  // });
 
   //test when movie count is less than 20
 

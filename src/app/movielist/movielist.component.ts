@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GetlistService } from '../getlist.service';
 import { Movie } from '../movie.model';
+import { NzResultServerErrorComponent } from 'ng-zorro-antd/result/partial/server-error.component';
 //import { Observable } from 'rxjs';
 
 @Component({
@@ -33,13 +34,23 @@ export class MovielistComponent implements OnInit {
   getPage(page: number) {
     this.getListService.getPage(page).subscribe((movies: { totalResults: number; results: Movie[] }) => {
       this.totalResults = movies.totalResults;
-      this.movielist = movies.results;
+      //this.movielist = movies.results;
       this.removedMovies = JSON.parse(localStorage.getItem('removed'));
-      if (this.removedMovies === null) {
-        this.removedMovies = [];
+      let filteredList = [];
+
+      let removedItems: number[] = JSON.parse(localStorage.getItem('removed'));
+      for(let movie of movies.results) {
+        if(removedItems != null) {
+          if(!removedItems.includes(movie.id)) {
+            filteredList.push(movie);
+          }
+        } else {
+          filteredList = movies.results;
+        }
       }
-      //console.log(this.removedMovies);
-      console.log(this.totalResults);
+
+      this.movielist = filteredList;
+      
     });
 
     this.currentPage = page;

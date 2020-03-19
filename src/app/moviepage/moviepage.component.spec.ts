@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MoviepageComponent } from './moviepage.component';
+import { GetlistService } from '../getlist.service';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from "@angular/router/testing";
 
 describe('MoviepageComponent', () => {
   let component: MoviepageComponent;
@@ -8,7 +11,9 @@ describe('MoviepageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MoviepageComponent ]
+      imports: [ HttpClientModule, RouterTestingModule ],
+      declarations: [ MoviepageComponent ],
+      providers: [ GetlistService ]
     })
     .compileComponents();
   }));

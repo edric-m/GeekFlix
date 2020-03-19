@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Movie } from '../movie.model';
 import { GetlistService } from '../getlist.service';
 import { ActivatedRoute, Params } from '@angular/router';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-moviepage',
@@ -22,8 +23,10 @@ export class MoviepageComponent implements OnInit {
     'kiss-wink-heart','laugh','laugh-beam','laugh-squint','laugh-wink','meh','meh-blank',
     'meh-rolling-eyes','sad-cry','sad-tear','smile','smile-beam','smile-wink','surprise','tired'];
   listOfSelectedValue = [];
-  defaultOption = [...this.listOfSelectedValue];
-  selectedValue = 'Default';
+  //defaultOption = [...this.listOfSelectedValue];
+  //selectedValue = 'Default';
+  faCoffee = faCoffee;
+  icon = "<fa-icon [icon]=\"faCoffee\"></fa-icon>";
 
   constructor(private getListService: GetlistService,
               private route: ActivatedRoute) { }

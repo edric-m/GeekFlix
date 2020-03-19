@@ -15,8 +15,8 @@
             [(ngModel)]="listOfSelectedValue" 
             (ngModelChange)="emotionAdded()">
             <nz-option *ngFor="let option of listOfOption" [nzLabel]="option" [nzValue]="option"></nz-option>
-            <nz-option *ngFor="let option of defaultOption" [nzLabel]="option" [nzValue]="option" nzHide></nz-option>
         </nz-select>
+
           <!-- <br />
           <br />
           <nz-select [(ngModel)]="selectedValue">

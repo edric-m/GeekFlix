@@ -22,7 +22,7 @@ export class MovieitemComponent implements OnInit {
   }
 
   itemClick() {
-    let linkName = this.name.replace(/ /g, '_');
+    let linkName = this.name.replace(/ /g, '-');
     linkName = linkName.replace(/\//g, '-');
     //console.log(linkName);
     this.router.navigate(['/movie/' + this.id + '/' + linkName]);

@@ -1,12 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 
 import { GetlistService } from './getlist.service';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('GetlistService', () => {
   let service: GetlistService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [ HttpClientModule ],
+      providers: [ GetlistService ]
+    });
     service = TestBed.inject(GetlistService);
   });
 
