@@ -26,22 +26,23 @@ export class MovielistComponent implements OnInit {
     this.getListService.getPage(page).subscribe((movies: { totalResults: number; results: Movie[] }) => {
       this.totalResults = movies.totalResults;
       //this.movielist = movies.results;
-      this.removedMovies = JSON.parse(localStorage.getItem('removed'));
-      let filteredList = [];
 
-      let removedItems: number[] = JSON.parse(localStorage.getItem('removed'));
-      for(let movie of movies.results) {
-        if(removedItems != null) {
-          if(!removedItems.includes(movie.id)) {
-            filteredList.push(movie);
-          }
-        } else {
-          filteredList = movies.results;
-        }
-      }
+      // this.removedMovies = JSON.parse(localStorage.getItem('removed'));
+      // let filteredList = [];
 
-      this.movielist = filteredList;
-      
+      // let removedItems: number[] = JSON.parse(localStorage.getItem('removed'));
+      // for(let movie of movies.results) {
+      //   if(removedItems != null) {
+      //     if(!removedItems.includes(movie.id)) {
+      //       filteredList.push(movie);
+      //     }
+      //   } else {
+      //     filteredList = movies.results;
+      //   }
+      // }
+
+      // this.movielist = filteredList; //TODO: maybe return this to get intercept to work
+      this.movielist = movies.results;
     });
 
     this.currentPage = page;

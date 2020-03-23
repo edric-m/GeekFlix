@@ -9,6 +9,33 @@ import { Observable, of } from 'rxjs';
 import { Movie } from '../movie.model';
 //import { HttpClient } from '@angular/common/http';
 
+const fakeList = [
+  {poster_path: 'string',
+    id: 1,
+    original_title: 'string',
+    overview: 'string'},
+  {poster_path: 'string',
+    id: 2,
+    original_title: 'string',
+    overview: 'string'},
+  {poster_path: 'string',
+    id: 3,
+    original_title: 'string',
+    overview: 'string'},
+  {poster_path: 'string',
+    id: 4,
+    original_title: 'string',
+    overview: 'string'},
+  {poster_path: 'string',
+    id: 5,
+    original_title: 'string',
+    overview: 'string'},
+  {poster_path: 'string',
+    id: 6,
+    original_title: 'string',
+    overview: 'string'},
+];
+
 // //@Injectable() //neccesary?
 // class MockListService {
 //   listURL: string = "https://api.themoviedb.org/3/discover/movie?api_key=b45808cfc639faa44235410b835b0912&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false";
@@ -80,7 +107,7 @@ describe('MovielistComponent', () => {
     fixture.detectChanges();
 
     //inject the serve class to the component instance, but instead will used mocked service
-    getlistService = TestBed.inject(GetlistService);
+    getlistService = TestBed.get(GetlistService);
 
   });
 
@@ -89,16 +116,16 @@ describe('MovielistComponent', () => {
   });
 
   it('component initialises with the mocked service using spyOn', () => {
-    let movieResults: Movie[];
-    for(let i=0;i<20;i++) {
-      movieResults.push({
-        poster_path: 'posterPath' + i,
-        id: i,
-        original_title: 'title' + i,
-        overview: 'overview' + i
-      });
-    }
-    spyOn(getlistService,'getPage').and.returnValue(of({ totalResults: 20, results: movieResults}));
+    // let movieResults: Movie[];
+    // for(let i=0;i<20;i++) {
+    //   movieResults.push({
+    //     poster_path: 'posterPath' + i,
+    //     id: i,
+    //     original_title: 'title' + i,
+    //     overview: 'overview' + i
+    //   });
+    // }
+    spyOn(getlistService,'getPage').and.returnValue(of({ totalResults: 7, results: fakeList}));
     component.ngOnInit();
     expect(component.movielist.length).toEqual(20);
   });
