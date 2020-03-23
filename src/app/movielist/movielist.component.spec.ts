@@ -14,7 +14,7 @@ describe('MovielistComponent', () => {
   let component: MovielistComponent;
   let fixture: ComponentFixture<MovielistComponent>;
   let getlistService: GetlistService;
-  let response: Movie[];
+  //let response: Movie[];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -33,14 +33,16 @@ describe('MovielistComponent', () => {
 
     //inject the serve class to the component instance, can use the mocked service
     getlistService = TestBed.get(GetlistService);
-    response = fakePageResponseData;
+    //response = fakePageResponseData;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy(); //does this call ngOnInit()?
   });
 
+  //ngOnInit results in a list of 20
   it('listService.getPage() returns a list of 20', () => {
+    let response = fakePageResponseData;
     spyOn(getlistService,'getPage').and.returnValue(of({ totalResults: response.length, results: response}));
     component.ngOnInit();
     expect(component.movielist.length).toEqual(20);
@@ -56,8 +58,16 @@ describe('MovielistComponent', () => {
   });
 
   //when getpage returns list of 1, return 20
+  it('ngOnInit sets movielist with a list containing 20 items when listservice.getPage returns 1 item', () => {
+    let responseOne = [fakePageResponseData[0]]; //why do we need to reinitialise? when beforeEach resets it?
+    spyOn(getlistService,'getPage').and.returnValue(of({ totalResults: responseOne.length, results: responseOne}));
+    component.ngOnInit();
+    expect(component.movielist.length).toEqual(20);
+  });
 
-  //ngOnInit always results in a list of 20
+  it('ngOnInit removes from movielist the items that appear in toRemove[]', () => {
+    //https://github.com/jasmine/jasmine/issues/299 //spyon localstorage in karma
+  });
 
   //ngOnInit removes an item from the list
 

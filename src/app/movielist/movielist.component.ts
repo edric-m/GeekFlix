@@ -3,6 +3,7 @@ import { GetlistService } from '../getlist.service';
 import { Movie } from '../movie.model';
 import { NzResultServerErrorComponent } from 'ng-zorro-antd/result/partial/server-error.component';
 //import { Observable } from 'rxjs';
+import fakeListResponseData from '../fakeList.data';
 
 @Component({
   selector: 'app-movielist',
@@ -20,6 +21,12 @@ export class MovielistComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPage(this.currentPage);
+    if (this.movielist.length === 0) {
+      this.movielist = fakeListResponseData;
+    }
+    if (this.movielist.length === 1) {
+      this.movielist = fakeListResponseData;
+    }
   }
 
   getPage(page: number) {
