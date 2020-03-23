@@ -2,15 +2,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MovielistComponent } from './movielist.component';
 import { GetlistService } from '../getlist.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+//import { ignoreElements } from 'rxjs/operators';
+import { Movie } from '../movie.model';
+import { Observable } from 'rxjs';
+
+
 
 describe('MovielistComponent', () => {
   let component: MovielistComponent;
   let fixture: ComponentFixture<MovielistComponent>;
+  let getlistService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ HttpClientModule ],
+      imports: [ HttpClientTestingModule ],
       declarations: [ MovielistComponent ],
       providers: [ GetlistService ]
     })
@@ -21,14 +27,24 @@ describe('MovielistComponent', () => {
     fixture = TestBed.createComponent(MovielistComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    //inject the serve class to the component instance
+    getlistService = TestBed.inject(GetlistService)
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  // it('should create', () => {
+  //   expect(component).toBeTruthy(); //does this call ngOnInit()?
+  // });
 
-  // it('movielist should have exactly 20 items', () => {
-  //   expect(component.movielist.length).toEqual(20);
+  // it('should use getListService', () => {
+  //   expect(getlistService.getPage()).toBe('real value');
+  // });
+
+  // it('should get the data from the getlist service using getPage(id:number)', async(() => {
+  //   expect(getlistService.getPage)
+  // }));
+
+  // it('should return error when the http request fails', () => {
   // });
 
   //test when movie count is less than 20

@@ -20,15 +20,6 @@ export class MovielistComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPage(this.currentPage);
-    // const listObservable = Observable.create(observer => {
-    //   setInterval( () => {
-    //     observer.next(this.getListService.listResults);
-    //   }, 1000);
-    // });
-
-    // listObservable.subscribe(data => {
-    //   console.log(data);
-    // });
   }
 
   getPage(page: number) {
