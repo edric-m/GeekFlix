@@ -8,15 +8,9 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 
 // Other imports
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-
 import { HttpHeaders } from '@angular/common/http';
 
-interface Data {
-  name: string;
-}
-
 const testUrl = "https://api.themoviedb.org/3/discover/movie?api_key=b45808cfc639faa44235410b835b0912&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=878";
-;
 
 describe('GetlistService', () => {
   let service: GetlistService;
@@ -74,6 +68,4 @@ describe('GetlistService', () => {
     // Finally, assert that there are no outstanding requests.
     httpTestingController.verify();
   });
-
-  //test that page list is always 20 items long
 });

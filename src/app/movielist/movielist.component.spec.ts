@@ -3,22 +3,73 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MovielistComponent } from './movielist.component';
 import { GetlistService } from '../getlist.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { Observable, of } from 'rxjs';
 //import { ignoreElements } from 'rxjs/operators';
+//import { Injectable } from '@angular/core';
 import { Movie } from '../movie.model';
-import { Observable } from 'rxjs';
+//import { HttpClient } from '@angular/common/http';
 
+// //@Injectable() //neccesary?
+// class MockListService {
+//   listURL: string = "https://api.themoviedb.org/3/discover/movie?api_key=b45808cfc639faa44235410b835b0912&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false";
+//   movieURLprefix: string = "https://api.themoviedb.org/3/movie/";
+//   movieURLsuffix: string = "?api_key=b45808cfc639faa44235410b835b0912&language=en-US";
+//   relatedURLsuffix: string = "/similar?api_key=b45808cfc639faa44235410b835b0912&language=en-US&page=1";
+//   page: string = "&page="; //page 1 only for now should be component input as integer
+//   genre: string = "&with_genres=878";
 
+//   constructor(private http: HttpClient) { } //error cannot resolve all parameters for MockedListService(?)
+
+//   getPage(page: number) {
+//     //this.listResults = this.getList(page);
+//     let movieResults: Movie[];
+//     for(let i=0;i<20;i++) {
+//       movieResults.push({
+//         poster_path: 'posterPath' + i,
+//         id: i,
+//         original_title: 'title' + i,
+//         overview: 'overview' + i
+//       });
+//     }
+//     return { totalResults: 20, results: movieResults};
+//   }
+
+//   getMoviePage(movieId: number) {
+//     //return this.getMovie(movieId);
+//     return {
+//       poster_path: 'posterPath' + movieId,
+//       id: movieId,
+//       original_title: 'title' + movieId,
+//       overview: 'overview' + movieId
+//     }
+//   }
+
+//   getRelatedMovies(movieId: number) {
+//     //return this.getRelated(movieId);
+//     let movieResults: Movie[];
+//     for(let i=0;i<20;i++) {
+//       movieResults.push({
+//         poster_path: 'posterPath' + i,
+//         id: i,
+//         original_title: 'title' + i,
+//         overview: 'overview' + i
+//       });
+//     }
+//     return movieResults;
+//   }
+// }
 
 describe('MovielistComponent', () => {
   let component: MovielistComponent;
   let fixture: ComponentFixture<MovielistComponent>;
-  let getlistService;
+  let getlistService: GetlistService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ HttpClientTestingModule ],
       declarations: [ MovielistComponent ],
-      providers: [ GetlistService ]
+      //providers: [ { provide: GetlistService, useClass: MockListService } ] //overwrite service with mocked service
+      providers: [ GetlistService, HttpClientTestingModule ]
     })
     .compileComponents();
   }));
@@ -28,30 +79,44 @@ describe('MovielistComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    //inject the serve class to the component instance
-    getlistService = TestBed.inject(GetlistService)
+    //inject the serve class to the component instance, but instead will used mocked service
+    getlistService = TestBed.inject(GetlistService);
+
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy(); //does this call ngOnInit()?
+  it('should create', () => {
+    expect(component).toBeTruthy(); //does this call ngOnInit()?
+  });
+
+  it('component initialises with the mocked service using spyOn', () => {
+    let movieResults: Movie[];
+    for(let i=0;i<20;i++) {
+      movieResults.push({
+        poster_path: 'posterPath' + i,
+        id: i,
+        original_title: 'title' + i,
+        overview: 'overview' + i
+      });
+    }
+    spyOn(getlistService,'getPage').and.returnValue(of({ totalResults: 20, results: movieResults}));
+    component.ngOnInit();
+    expect(component.movielist.length).toEqual(20);
+  });
+
+  //getpage returns list of 20 (mock the service)
+  // it('getpage(pageNumber) sets movielist[] to a list of 20', () => {
+  //   component.ngOnInit();
   // });
 
-  // it('should use getListService', () => {
-  //   expect(getlistService.getPage()).toBe('real value');
-  // });
+  //when getpage returns list of 0, return 20
 
-  // it('should get the data from the getlist service using getPage(id:number)', async(() => {
-  //   expect(getlistService.getPage)
-  // }));
+  //when getpage returns list of 1, return 20
 
-  // it('should return error when the http request fails', () => {
-  // });
+  //ngOnInit always results in a list of 20
+
+  //ngOnInit removes an item from the list
 
   //test when movie count is less than 20
 
   //test when no data is loaded
-
-  //test when alignment is off?
-
-  //test that element is of a specific size
 });
