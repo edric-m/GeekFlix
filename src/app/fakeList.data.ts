@@ -1,0 +1,22 @@
+export default [
+    { poster_path: 'fakePosterPath', id: 1, original_title: 'fakeTitle_1', overview: 'fakeOverview' },
+    { poster_path: 'fakePosterPath', id: 2, original_title: 'fakeTitle_2', overview: 'fakeOverview' },
+    { poster_path: 'fakePosterPath', id: 3, original_title: 'fakeTitle_3', overview: 'fakeOverview' },
+    { poster_path: 'fakePosterPath', id: 4, original_title: 'fakeTitle_4', overview: 'fakeOverview' },
+    { poster_path: 'fakePosterPath', id: 5, original_title: 'fakeTitle_5', overview: 'fakeOverview' },
+    { poster_path: 'fakePosterPath', id: 6, original_title: 'fakeTitle_6', overview: 'fakeOverview' },
+    { poster_path: 'fakePosterPath', id: 7, original_title: 'fakeTitle_7', overview: 'fakeOverview' },
+    { poster_path: 'fakePosterPath', id: 8, original_title: 'fakeTitle_8', overview: 'fakeOverview' },
+    { poster_path: 'fakePosterPath', id: 9, original_title: 'fakeTitle_9', overview: 'fakeOverview' },
+    { poster_path: 'fakePosterPath', id: 10, original_title: 'fakeTitle_10', overview: 'fakeOverview' },
+    { poster_path: 'fakePosterPath', id: 11, original_title: 'fakeTitle_11', overview: 'fakeOverview' },
+    { poster_path: 'fakePosterPath', id: 12, original_title: 'fakeTitle_12', overview: 'fakeOverview' },
+    { poster_path: 'fakePosterPath', id: 13, original_title: 'fakeTitle_13', overview: 'fakeOverview' },
+    { poster_path: 'fakePosterPath', id: 14, original_title: 'fakeTitle_14', overview: 'fakeOverview' },
+    { poster_path: 'fakePosterPath', id: 15, original_title: 'fakeTitle_15', overview: 'fakeOverview' },
+    { poster_path: 'fakePosterPath', id: 16, original_title: 'fakeTitle_16', overview: 'fakeOverview' },
+    { poster_path: 'fakePosterPath', id: 17, original_title: 'fakeTitle_17', overview: 'fakeOverview' },
+    { poster_path: 'fakePosterPath', id: 18, original_title: 'fakeTitle_18', overview: 'fakeOverview' },
+    { poster_path: 'fakePosterPath', id: 19, original_title: 'fakeTitle_19', overview: 'fakeOverview' },
+    { poster_path: 'fakePosterPath', id: 20, original_title: 'fakeTitle_20', overview: 'fakeOverview' }
+];
