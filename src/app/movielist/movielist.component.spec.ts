@@ -64,7 +64,7 @@ describe('MovielistComponent', () => {
   
   //delete a movie from the list
   //-the movie is part of a deleted list
-  it('should not display the movies whose id is contained in \'removedMovies\'', async(async() => {
+  it('should not include the movies whose id is contained in \'removedMovies\'', async(async() => {
     //assemble
     fixture.detectChanges();
     let idOfDeletedMovie = Math.floor(Math.random() * Math.floor(20)); //random number from 0 to 19
@@ -81,6 +81,39 @@ describe('MovielistComponent', () => {
 
   //load more when user scrolls to the bottom
   //-increace the movielist when the user scrolls down
+  it('should increace the number of movies to list when the page\'s \'load\' button is clicked', async(async() => {
+    //assemble 
+    fixture.detectChanges();
+    await fixture.whenStable();
+    let oldMovieListLength = component.movielist.length;
+
+    //act 
+    component.loadMoreMovies();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    //assert
+    expect(component.movielist.length > oldMovieListLength).toBeTrue();
+    //expect(component.movielist.length).toEqual(expectedMovieListLength); //don't write fragile tests
+  }));
+
+  it('should not add duplicate movies to the list', async(async() => {
+    //assemble
+    fixture.detectChanges();
+    component.removedMovies = [0]; //id of the first item in the stub
+    let movieListLength = 20; //20 is the ammount of items in the stub
+    await fixture.whenStable();
+    expect(component.movielist.length).toEqual(movieListLength - 1);
+    
+    //act 
+    component.removedMovies = []; //dont remove any for the next get page
+    component.loadMoreMovies();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    //assert
+    expect(component.movielist.length).toEqual(movieListLength);
+  }));
   
   // //getpage should be an asynchronous call
   // xit('removedMovies[] are removed from movielist after fillList() is called', () => {

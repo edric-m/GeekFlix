@@ -14,11 +14,12 @@
     </div>
 </div>
 <div class="navigation">
-    <nz-pagination 
+    <button nz-button nzType="default" (click)="loadMoreMovies()">Load More</button>
+    <!-- <nz-pagination 
         [nzPageIndex]="currentPage" 
         [nzPageSize]="20" 
         [nzTotal]="totalResults"
         (nzPageIndexChange)="getPage($event)"
         nzShowQuickJumper>
-    </nz-pagination>
+    </nz-pagination> -->
 </div>
