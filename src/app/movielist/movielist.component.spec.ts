@@ -6,14 +6,13 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { defer, of } from 'rxjs';
 //import { ignoreElements } from 'rxjs/operators';
 //import { Injectable } from '@angular/core';
-import { Movie } from '../movie.model';
 //import { HttpClient } from '@angular/common/http';
 import fakePageResponseData from '../fakeList.data';
 
+//https://netbasal.com/testing-observables-in-angular-a2dbbfaf5329
 export function fakeAsyncResponse<T>(data: T) {
   return defer(() => Promise.resolve(data));
 }
-
 const listServiceStub = {
   getPage(page: number) {
     return fakeAsyncResponse({totalResults: fakePageResponseData.length, results: fakePageResponseData});
@@ -28,7 +27,7 @@ describe('MovielistComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ HttpClientTestingModule ],
+      //imports: [ HttpClientTestingModule ], //no need to import this?
       declarations: [ MovielistComponent ],
       providers: [ { provide: GetlistService, useValue: listServiceStub } ] //overwrite service with mocked service
       //providers: [ GetlistService ] //online resources say to also provide dependancies of dependancies? //, HttpClientTestingModule ]
@@ -81,7 +80,7 @@ describe('MovielistComponent', () => {
 
   //load more when user scrolls to the bottom
   //-increace the movielist when the user scrolls down
-  it('should increace the number of movies to list when the page\'s \'load\' button is clicked', async(async() => {
+  it('should increace the number of movies to list when the page\'s \'More\' button is clicked', async(async() => {
     //assemble 
     fixture.detectChanges();
     await fixture.whenStable();
@@ -89,7 +88,7 @@ describe('MovielistComponent', () => {
 
     //act 
     component.loadMoreMovies();
-    await fixture.whenStable();
+    await fixture.whenStable(); //this line is skipped because its async, i dont think there is use in calling twice?
     fixture.detectChanges();
 
     //assert
@@ -108,11 +107,28 @@ describe('MovielistComponent', () => {
     //act 
     component.removedMovies = []; //dont remove any for the next get page
     component.loadMoreMovies();
-    await fixture.whenStable();
+    await fixture.whenStable(); //this line is skipped because its async, i dont think there is use in calling twice?
     fixture.detectChanges();
 
     //assert
     expect(component.movielist.length).toEqual(movieListLength);
+  }));
+
+  it('should have at least 20 movies added to the list when the page loads', async(async() => {
+    //assemble
+    fixture.detectChanges();
+    component.removedMovies = [0,1,2]; //id of the first item in the stub
+    let movieListLength = 20; //20 is the ammount of items in the stub
+    
+    //act 
+    await fixture.whenStable();
+
+    //assert
+    expect(component.movielist.length).toEqual(movieListLength);
+    //the new items should be added to the end
+    expect(component.movielist[17].id).toEqual(0);
+    expect(component.movielist[18].id).toEqual(1);
+    expect(component.movielist[19].id).toEqual(2);
   }));
   
   // //getpage should be an asynchronous call
