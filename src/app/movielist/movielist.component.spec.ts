@@ -39,45 +39,49 @@ describe('MovielistComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MovielistComponent);
     component = fixture.componentInstance;
-  
     //inject the serve class to the component instance, can use the mocked service
     getlistService = TestBed.get(GetlistService);
-    //response = fakePageResponseData;
-    fixture.detectChanges();
+    //fixture.detectChanges();
   });
 
   //behavior of the component from the users point of view
   //we asserst specific things to be true if that behavior were implemented
 
-  xit('20 movies should be displayed even when some movies have been removed from the list', () => {
-    fixture.detectChanges(); //ngOnInit will be called as part of this function
-    
-  });
-
   //see a list of movies from the api
   //-there is a list filled with movie information
+  it('should have a list of movies to show the user', async(async() => {
+    //assemble
+    component.movielist = [];
+    fixture.detectChanges();
+
+    //act
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    //assert
+    expect(component.movielist.length > 0).toBeTrue();
+  }));
   
   //delete a movie from the list
   //-the movie is part of a deleted list
+  it('should not display the movies whose id is contained in \'removedMovies\'', async(async() => {
+    //assemble
+    fixture.detectChanges();
+    let idOfDeletedMovie = Math.floor(Math.random() * Math.floor(20)); //random number from 0 to 19
+    component.removedMovies = [idOfDeletedMovie];
+    
+    //act
+    await fixture.whenStable();
+    //fixture.detectChanges(); //ommitted because ngOnInit accesses localStorage.getItem()
+
+    //assert
+    expect(component.movielist.length).toEqual(19);
+    expect(component.removedMovies).toEqual([idOfDeletedMovie]);
+  }));
 
   //load more when user scrolls to the bottom
   //-increace the movielist when the user scrolls down
-
-  it('should create', () => {
-    expect(component).toBeTruthy(); //does this call ngOnInit()?
-  });
-
-  //getpage should be an asynchronous call
-  it('movielist is filled with the getlistservice after component is created', async(async() => {
-    //let response = fakePageResponseData;
-    component.movielist = [];
-    //expect(component.movielist.length).toEqual(0);
-    //spyOn(getlistService,'getPage').and.returnValue(of({ totalResults: response.length, results: response})); //of() is synchronus
-    await fixture.whenStable();
-    fixture.detectChanges();
-    expect(component.movielist.length).toBe(20);
-  }));
-
+  
   // //getpage should be an asynchronous call
   // xit('removedMovies[] are removed from movielist after fillList() is called', () => {
   //   let response = fakePageResponseData;

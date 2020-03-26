@@ -40,10 +40,11 @@ export class MovielistComponent implements OnInit {
       // this.removedMovies = JSON.parse(localStorage.getItem('removed'));
       let filteredList = [];
 
-      let removedItems: number[] = JSON.parse(localStorage.getItem('removed'));
+      //this.removedMovies = JSON.parse(localStorage.getItem('removed'));
+      //let removedItems = this.removedMovies;
       for(let movie of movies.results) {
-        if(removedItems != null) {
-          if(!removedItems.includes(movie.id)) {
+        if(this.removedMovies != null) {
+          if(!this.removedMovies.includes(movie.id)) {
             filteredList.push(movie);
           }
         } else {
@@ -51,7 +52,7 @@ export class MovielistComponent implements OnInit {
         }
       }
 
-      this.movielist = filteredList; //TODO: maybe return this to get intercept to work
+      this.movielist = filteredList; 
       //this.movielist = movies.results;
     });
 
@@ -69,7 +70,8 @@ export class MovielistComponent implements OnInit {
       localStorage.setItem('removed', JSON.stringify(removedItems));
     }
 
-    this.getPage(this.currentPage);
+    //this.getPage(this.currentPage);
+    this.ngOnInit();
     
     //location.reload(); //TODO: this is no good because it requires calling the server again (not reactive or SPA), need to bind the event to parent
   
