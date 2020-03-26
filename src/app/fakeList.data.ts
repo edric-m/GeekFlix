@@ -1,4 +1,5 @@
 export default [
+    { poster_path: 'fakePosterPath', id: 0, original_title: 'fakeTitle_0', overview: 'fakeOverview' },
     { poster_path: 'fakePosterPath', id: 1, original_title: 'fakeTitle_1', overview: 'fakeOverview' },
     { poster_path: 'fakePosterPath', id: 2, original_title: 'fakeTitle_2', overview: 'fakeOverview' },
     { poster_path: 'fakePosterPath', id: 3, original_title: 'fakeTitle_3', overview: 'fakeOverview' },
@@ -17,6 +18,5 @@ export default [
     { poster_path: 'fakePosterPath', id: 16, original_title: 'fakeTitle_16', overview: 'fakeOverview' },
     { poster_path: 'fakePosterPath', id: 17, original_title: 'fakeTitle_17', overview: 'fakeOverview' },
     { poster_path: 'fakePosterPath', id: 18, original_title: 'fakeTitle_18', overview: 'fakeOverview' },
-    { poster_path: 'fakePosterPath', id: 19, original_title: 'fakeTitle_19', overview: 'fakeOverview' },
-    { poster_path: 'fakePosterPath', id: 20, original_title: 'fakeTitle_20', overview: 'fakeOverview' }
+    { poster_path: 'fakePosterPath', id: 19, original_title: 'fakeTitle_19', overview: 'fakeOverview' }
 ];

@@ -20,13 +20,16 @@ export class MovielistComponent implements OnInit {
   constructor(private getListService: GetlistService) { }
 
   ngOnInit(): void {
+    //load remove movies here
+    this.removedMovies = JSON.parse(localStorage.getItem('removed'));
+
+    //fill the movielist[]
+    this.fillList();
+  }
+
+  fillList() {
     this.getPage(this.currentPage);
-    if (this.movielist.length === 0) {
-      this.movielist = fakeListResponseData;
-    }
-    if (this.movielist.length === 1) {
-      this.movielist = fakeListResponseData;
-    }
+    window.scroll(0,0); //return to the top of the page
   }
 
   getPage(page: number) {
@@ -35,25 +38,25 @@ export class MovielistComponent implements OnInit {
       //this.movielist = movies.results;
 
       // this.removedMovies = JSON.parse(localStorage.getItem('removed'));
-      // let filteredList = [];
+      let filteredList = [];
 
-      // let removedItems: number[] = JSON.parse(localStorage.getItem('removed'));
-      // for(let movie of movies.results) {
-      //   if(removedItems != null) {
-      //     if(!removedItems.includes(movie.id)) {
-      //       filteredList.push(movie);
-      //     }
-      //   } else {
-      //     filteredList = movies.results;
-      //   }
-      // }
+      let removedItems: number[] = JSON.parse(localStorage.getItem('removed'));
+      for(let movie of movies.results) {
+        if(removedItems != null) {
+          if(!removedItems.includes(movie.id)) {
+            filteredList.push(movie);
+          }
+        } else {
+          filteredList = movies.results;
+        }
+      }
 
-      // this.movielist = filteredList; //TODO: maybe return this to get intercept to work
-      this.movielist = movies.results;
+      this.movielist = filteredList; //TODO: maybe return this to get intercept to work
+      //this.movielist = movies.results;
     });
 
     this.currentPage = page;
-    window.scroll(0,0); //return to the top of the page
+    
   }
 
   removeMovie(id:number) {
