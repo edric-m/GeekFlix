@@ -16,7 +16,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const appRoutes: Routes = [
   { path: '', component : MovielistComponent }, //how to make default path with the right url?
-  { path: 'movies/sci-fi', component: MovielistComponent },
+  { path: 'movies', component: MovielistComponent },
   { path: 'movie/:id/:name', component: MoviepageComponent }
 ];
 

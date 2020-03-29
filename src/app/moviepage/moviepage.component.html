@@ -1,3 +1,17 @@
+<div class="breadcrum">
+    <nz-breadcrumb>
+        <nz-breadcrumb-item>
+            Home
+        </nz-breadcrumb-item>
+        <nz-breadcrumb-item>
+            <a routerLink="../../../movies">Movies</a>
+        </nz-breadcrumb-item>
+        <nz-breadcrumb-item>
+            {{ movieTitle }}
+        </nz-breadcrumb-item>
+    </nz-breadcrumb>
+</div>
+
 <nz-layout>
     <nz-header><h1 class="title" nz-title>{{ movieTitle }}</h1></nz-header>
     <nz-layout>
@@ -27,14 +41,18 @@
       </nz-content>
     </nz-layout>
     <nz-footer>
-        <h2 nz-title>Related</h2>
+        <div *ngIf="hasRelatedMovies">
+            <h2 nz-title class="related_title" #thenBlock>Related</h2>
+        </div> 
+        <h2 nz-title class="related_title" #elseBlock></h2>
         <div *ngFor="let movie of relatedMovies | slice:0:6" nz-col class="gutter-row" nzSpan="4">
             <div class="gutter-box">
                 <app-movieitem 
                     [name]="movie.original_title" 
                     [description]="movie.overview" 
                     [image]="movie.poster_path"
-                    [id]="movie.id">
+                    [id]="movie.id"
+                    (itemDelete)="deleteMovie($event)">
                 </app-movieitem>
             </div>
         </div>

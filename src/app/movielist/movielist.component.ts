@@ -61,7 +61,7 @@ export class MovielistComponent implements OnInit {
     this.currentPage = page;
   }
 
-  removeMovie(id:number) {
+  removeMovie(id:number) { //TODO: make this function a service or something
     if(localStorage.getItem('removed') === null) {
       localStorage.setItem('removed', JSON.stringify([id]));
     }
@@ -70,7 +70,7 @@ export class MovielistComponent implements OnInit {
       removedItems.push(id); //TODO: this pushes duplicates when it shouldnt
       localStorage.setItem('removed', JSON.stringify(removedItems));
 
-      let newList = []
+      let newList = [];
       for(let movie of this.movielist) {
         if(movie.id != id) {
           newList.push(movie);

@@ -15,7 +15,9 @@ export class MoviepageComponent implements OnInit {
   movieImage: string;
   relatedMovies: Movie[];
   imagePrefix: string = "https://image.tmdb.org/t/p/w1280";
-
+  removedMovies: number[] = [];
+  hasRelatedMovies: boolean;
+ 
   listOfOption = [
     'angry','dizzy','flushed','frown','frown-open','grimace','grin',
     'grin-alt','grin-beam','grin-beam-sweat','grin-hearts','grin-squint','grin-squint-tears',
@@ -25,21 +27,29 @@ export class MoviepageComponent implements OnInit {
   listOfSelectedValue = [];
   //defaultOption = [...this.listOfSelectedValue];
   //selectedValue = 'Default';
-  faCoffee = faCoffee;
-  icon = "<fa-icon [icon]=\"faCoffee\"></fa-icon>";
+  //faCoffee = faCoffee;
+  //icon = "<fa-icon [icon]=\"faCoffee\"></fa-icon>";
 
   constructor(private getListService: GetlistService,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.listOfSelectedValue = JSON.parse(localStorage.getItem(this.route.snapshot.params['id']));
-    this.getMovie(this.route.snapshot.params['id']);
+    //this.listOfSelectedValue = JSON.parse(localStorage.getItem(this.route.snapshot.params['id']));
+    //this.getMovie(this.route.snapshot.params['id']);
+    // let temp = JSON.parse(localStorage.getItem('removed'));
+    // if(temp === null) {
+    //   this.removedMovies = [];
+    // } else {
+    //   this.removedMovies = temp;
+    // }
+
+    this.removedMovies = JSON.parse(localStorage.getItem('removed'));
     this.route.params
-      .subscribe(
+      .subscribe( //this is used when the user clicks on a related movie
         (params: Params) => {
           this.getMovie(params['id']);
-          this.listOfSelectedValue = JSON.parse(localStorage.getItem(this.route.snapshot.params['id']));
-          window.scroll(0,0); //scroll to top of page
+          //this.listOfSelectedValue = JSON.parse(localStorage.getItem(this.route.snapshot.params['id']));
+          this.listOfSelectedValue = JSON.parse(localStorage.getItem(params['id']));
         }
       );
   }
@@ -65,8 +75,42 @@ export class MoviepageComponent implements OnInit {
     });
 
     this.getListService.getRelatedMovies(movieId).subscribe((movies) => {
-      this.relatedMovies = movies;
+      let filteredMovies = [];
+      for(let movie of movies) {
+        if(!this.removedMovies.includes(movie.id)) {
+          filteredMovies.push(movie);
+        }
+      }
+      this.relatedMovies = filteredMovies;
       console.log(movies);
+      console.log(this.removedMovies);
+      if(filteredMovies.length > 0) {
+        this.hasRelatedMovies = true;
+      } else {
+        this.hasRelatedMovies = false;
+      }
+
+      window.scroll(0,0); //scroll to top of page only after page is loaded
     });
+  }
+
+  //TODO: this function is duplicate code
+  deleteMovie(id: number) {
+    if(localStorage.getItem('removed') === null) {
+      localStorage.setItem('removed', JSON.stringify([id]));
+    }
+    else {
+      let removedItems = JSON.parse(localStorage.getItem('removed'));
+      removedItems.push(id); //TODO: this pushes duplicates when it shouldnt
+      localStorage.setItem('removed', JSON.stringify(removedItems));
+
+      let newList = [];
+      for(let movie of this.relatedMovies) {
+        if(movie.id != id) {
+          newList.push(movie);
+        }
+      }
+      this.relatedMovies = newList;
+    }
   }
 }

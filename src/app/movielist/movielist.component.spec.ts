@@ -39,8 +39,12 @@ describe('MovielistComponent', () => {
     fixture = TestBed.createComponent(MovielistComponent);
     component = fixture.componentInstance;
     //inject the serve class to the component instance, can use the mocked service
-    getlistService = TestBed.get(GetlistService);
+    getlistService = TestBed.get(GetlistService); //use TestBed.inject() instead?
     //fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
 
   //behavior of the component from the users point of view
@@ -117,8 +121,8 @@ describe('MovielistComponent', () => {
   it('should have at least 20 movies added to the list when the page loads', async(async() => {
     //assemble
     fixture.detectChanges();
-    component.removedMovies = [0,1,2]; //id of the first item in the stub
-    let movieListLength = 20; //20 is the ammount of items in the stub
+    component.removedMovies = [0,1,2]; //id of the first items in the stub
+    let movieListLength = 20; //20 is the amount of items in the stub
     
     //act 
     await fixture.whenStable();
