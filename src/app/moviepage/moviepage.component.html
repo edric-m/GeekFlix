@@ -12,55 +12,50 @@
     </nz-breadcrumb>
 </div>
 
-<nz-layout>
-    <nz-header><h1 class="title" nz-title>{{ movieTitle }}</h1></nz-header>
-    <nz-layout>
-      <nz-content class="content">
-        <div class="poster-container">
-            <img class="poster" alt="example" [src]="imagePrefix + movieImage" />
-        </div>
-        <div class="movie-description">
-            <p>{{ movieDescription }}</p>
-        </div>
+<div class="page-background" 
+    style="background-image: url({{imagePrefix + movieBackdropImage}});">
+    <div class="center">
 
-        <nz-select 
-            nzMode="multiple" 
-            nzPlaceHolder="select emotions" 
-            [(ngModel)]="listOfSelectedValue" 
-            (ngModelChange)="emotionAdded()">
-            <nz-option *ngFor="let option of listOfOption" [nzLabel]="option" [nzValue]="option"></nz-option>
-        </nz-select>
-
-          <!-- <br />
-          <br />
-          <nz-select [(ngModel)]="selectedValue">
-            <nz-option *ngFor="let option of listOfOption" [nzLabel]="option" [nzValue]="option"></nz-option>
-            <nz-option nzLabel="Default Value" nzValue="Default" nzHide></nz-option>
-          </nz-select> -->
-
-      </nz-content>
-    </nz-layout>
-    <nz-footer>
-        <div *ngIf="hasRelatedMovies">
-            <h2 nz-title class="related_title" #thenBlock>Related</h2>
-        </div> 
-        <h2 nz-title class="related_title" #elseBlock></h2>
-        <div *ngFor="let movie of relatedMovies | slice:0:6" nz-col class="gutter-row" nzSpan="4">
-            <div class="gutter-box">
-                <app-movieitem 
-                    [name]="movie.original_title" 
-                    [description]="movie.overview" 
-                    [image]="movie.poster_path"
-                    [id]="movie.id"
-                    (itemDelete)="deleteMovie($event)">
-                </app-movieitem>
+        <nz-card class="content">
+            <div class="poster-container">
+                <img class="poster" alt="example" [src]="imagePrefix + movieImage" />
             </div>
+    
+            <h1 class="title" nz-title>{{ movieTitle + movieReleaseDate }}</h1>
+            
+            <h3>Overview</h3>
+            <div class="movie-description">
+                <p>{{ movieDescription }}</p>
+            </div>
+    
+            <h3>Rating</h3>
+            <nz-select 
+                nzMode="multiple" 
+                nzPlaceHolder="select emotions" 
+                [(ngModel)]="listOfSelectedValue" 
+                (ngModelChange)="emotionAdded()">
+                <nz-option *ngFor="let option of listOfOption" [nzLabel]="option" [nzValue]="option"></nz-option>
+            </nz-select>
+    
+        </nz-card>
+    </div>
+</div>
+
+<div class="related-movie-section center">
+    <div *ngIf="hasRelatedMovies">
+        <h2 nz-title class="related_title" #thenBlock>Similar Movies</h2>
+    </div> 
+    <h2 nz-title class="related_title" #elseBlock></h2>
+    <div *ngFor="let movie of relatedMovies | slice:0:6" nz-col class="gutter-row" nzSpan="4">
+        <div class="gutter-box">
+            <app-movieitem 
+                [name]="movie.original_title" 
+                [description]="movie.overview" 
+                [image]="movie.poster_path"
+                [id]="movie.id"
+                (itemDelete)="deleteMovie($event)">
+            </app-movieitem>
         </div>
-        <!-- <div class="center">
-            <nz-button-group [nzSize]="large">
-                <button nz-button nzType="primary"><i nz-icon nzType="left"></i>Backward</button>
-                <button nz-button nzType="primary">Forward<i nz-icon nzType="right"></i></button>
-            </nz-button-group>
-        </div> -->
-    </nz-footer>
-  </nz-layout>
+    </div>
+
+</div>

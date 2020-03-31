@@ -100,6 +100,7 @@ describe('MoviepageComponent', () => {
     //load movie and related movies uses the getlistService
     await fixture.whenStable();
     //--assert
+    //expect the id to be 123
     expect(component.movieTitle).toEqual('focused_movie_stub_title');
   }));
 

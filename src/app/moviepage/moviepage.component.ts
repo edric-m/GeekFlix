@@ -15,15 +15,14 @@ export class MoviepageComponent implements OnInit {
   movieImage: string;
   relatedMovies: Movie[];
   imagePrefix: string = "https://image.tmdb.org/t/p/w1280";
+  movieBackdropImage: string;
+  movieReleaseDate: string;
   removedMovies: number[] = [];
   hasRelatedMovies: boolean;
  
   listOfOption = [
-    'angry','dizzy','flushed','frown','frown-open','grimace','grin',
-    'grin-alt','grin-beam','grin-beam-sweat','grin-hearts','grin-squint','grin-squint-tears',
-    'grin-stars','grin-tears','grin-tongue','grin-tongue-wink','grin-wink','kiss','kiss-heart',
-    'kiss-wink-heart','laugh','laugh-beam','laugh-squint','laugh-wink','meh','meh-blank',
-    'meh-rolling-eyes','sad-cry','sad-tear','smile','smile-beam','smile-wink','surprise','tired'];
+    'ಠ_ಠ','¯\_(ツ)_/¯','( ͡° ͜ʖ ͡°)','(╯°□°）╯︵ ┻━┻','ლ(ಠ益ಠ)ლ','(｡◕‿◕｡)','(ಥ﹏ಥ)','༼ つ ◕_◕ ༽つ',
+    '(ง ͠° ͟ل͜ ͡°)ง','(づ￣ ³￣)づ','♥‿♥','(>ლ)','ヾ(⌐■_■)ノ♪','≧☉_☉≦'];
   listOfSelectedValue = [];
   //defaultOption = [...this.listOfSelectedValue];
   //selectedValue = 'Default';
@@ -43,6 +42,7 @@ export class MoviepageComponent implements OnInit {
     //   this.removedMovies = temp;
     // }
 
+    //TODO: issue when the 'removed' key has no value - doesn't load any related
     this.removedMovies = JSON.parse(localStorage.getItem('removed'));
     this.route.params
       .subscribe( //this is used when the user clicks on a related movie
@@ -68,10 +68,17 @@ export class MoviepageComponent implements OnInit {
 
   getMovie(movieId: number) {
     this.getListService.getMoviePage(movieId).subscribe((movie) => {
+      this.movieReleaseDate = ' (' + movie.release_date.substring(0,4) + ')';
       this.movieTitle = movie.original_title;
       this.movieDescription = movie.overview;
       this.movieImage = movie.poster_path;
+      if(movie.backdrop_path === null) {
+        this.movieBackdropImage = movie.poster_path;
+      } else {
+        this.movieBackdropImage = movie.backdrop_path;
+      }
       console.log(movie);
+      console.log(this.movieBackdropImage);
     });
 
     this.getListService.getRelatedMovies(movieId).subscribe((movies) => {

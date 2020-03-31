@@ -5,6 +5,14 @@ import { Movie } from '../movie.model';
 //import { Observable } from 'rxjs';
 //import fakeListResponseData from '../fakeList.data';
 
+//use this
+// <div class="lessons-list" *ngIf="movielist else loading">
+//   ... 
+// </div>
+// <ng-template #loading>
+//     <div>Loading...</div>
+// </ng-template>
+
 @Component({
   selector: 'app-movielist',
   templateUrl: './movielist.component.html',

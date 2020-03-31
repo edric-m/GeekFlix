@@ -1,9 +1,25 @@
+.page-background {
+    position: relative;
+    background-size: auto;
+}
+
+/*
+.page-background::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: url(https://image.tmdb.org/t/p/w1280/eivQmS3wqzqnQWILHLc4FsEfcXP.jpg);
+    filter: grayscale(100%);
+}
+*/
+
 .content {
     display: inline-block;
 }
 
 .poster-container {
-    width: 21%;
+    width: 40%;
     float: left;
     padding: 10px;
 }
@@ -15,23 +31,36 @@
 }
 
 .title {
-    color: aliceblue;
+    color: rgb(78, 84, 88);
+}
+
+.movie-description {
+    /*padding: 10px;*/
+}
+
+nz-select {
+    width: 50%;
+}
+
+nz-card {
+    width: 70%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: left;
 }
 
 .center {
     text-align: center;
-}
-
-.movie-description {
     padding: 10px;
 }
-
-nz-select {
-    width: 40%;
-  }
 
 .breadcrum {
     text-align: left;
     margin-left: 30px;
     padding: 20px;
+}
+
+.related-movie-section{
+    width: 97%;
+    margin: auto;
+    text-align: left;
 }

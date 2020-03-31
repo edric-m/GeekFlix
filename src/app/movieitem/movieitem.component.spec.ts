@@ -25,6 +25,15 @@ describe('MovieitemComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should show the \'delete\' button only when it is moused over', () => {
+    //--assemble
+    expect(component.hovered).toBe(false);
+    //--act
+    component.hasMouseFocus(true);
+    //--assert
+    expect(component.hovered).toBe(true);
+  });
+
   //test case when image not loaded that it should fill the same space and replace image
 
   //test case when title not loaded it should fill the same space

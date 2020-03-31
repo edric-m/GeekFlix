@@ -1,9 +1,22 @@
-<nz-card nzHoverable style="width:240px" [nzCover]="coverTemplate" [nzExtra]="extraTemplate">
+<nz-card nzHoverable 
+    style="width:95%" 
+    [nzCover]="coverTemplate" 
+    [nzExtra]="extraTemplate"
+    (mouseenter)="hasMouseFocus(true)"
+    (mouseleave)="hasMouseFocus(false)">
     <nz-card-meta [nzTitle]="name" [nzDescription]="description | slice:0:70" (click)="itemClick()"></nz-card-meta>
 </nz-card>
 <ng-template #coverTemplate>
     <img alt="example" [src]="imagePrefix + imageFile" (click)="itemClick()"/>
 </ng-template>
 <ng-template #extraTemplate>
-    <button nz-button nzGhost nzType="danger" (click)="removeItem()">Delete</button>
+    <a [style.visibility]="hovered ? 'visible' : 'hidden'"
+        nz-popconfirm nzPopconfirmTitle="Permanently delete {{ name }} from the list?" 
+        [nzIcon]="iconTpl"
+        (nzOnConfirm)="removeItem()">
+        <i nz-icon nzType="close" nzTheme="outline"></i>
+    </a>
+    <ng-template #iconTpl>
+      <i nz-icon nzType="question-circle-o" style="color: red;"></i>
+    </ng-template>
 </ng-template>
