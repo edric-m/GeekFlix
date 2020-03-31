@@ -11,7 +11,7 @@
 </ng-template>
 <ng-template #extraTemplate>
     <a [style.visibility]="hovered ? 'visible' : 'hidden'"
-        nz-popconfirm nzPopconfirmTitle="Permanently delete '{{ name }}' from the list?" 
+        nz-popconfirm nzPopconfirmTitle="Permanently delete '{{ name }}' from your list?" 
         [nzIcon]="iconTpl"
         (nzOnConfirm)="removeItem()">
         <i nz-icon nzType="close" nzTheme="outline"></i>

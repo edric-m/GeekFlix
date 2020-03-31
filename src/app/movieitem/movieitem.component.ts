@@ -20,6 +20,7 @@ export class MovieitemComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
+    this.description = this.description.replace('["','').replace('"]','').replace(/","/g,' ');
   }
 
   itemClick() {

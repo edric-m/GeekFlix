@@ -21,18 +21,33 @@ export class MoviepageComponent implements OnInit {
   hasRelatedMovies: boolean;
   pageLoading: boolean = true;
  
-  listOfOption = [
-    '(｡◕‿◕｡)',
-    '(ಥ﹏ಥ)',
-    '♥‿♥',
-    'ლ(ಠ益ಠ)ლ',
-    '༼ つ◕.◕ ༽つ',
-    'ಠ_ಠ',
-    '¯\\_(ツ)_/¯',
-    '(╯°□°）╯︵ ┻━┻',
-    '(づ￣ ³￣)づ',
-    '(>ლ)',
-    'ヾ(⌐■_■)ノ♪'];
+  // listOfOption = [
+  //   '(｡◕‿◕｡)',
+  //   '(ಥ﹏ಥ)',
+  //   '♥‿♥',
+  //   'ლ(ಠ益ಠ)ლ',
+  //   '༼ つ◕_◕ ༽つ',
+  //   'ಠ_ಠ',
+  //   '¯\\_(ツ)_/¯',
+  //   '(╯°□°）╯︵┻━┻',
+  //   '(づ￣ ³￣)づ',
+  //   '(>ლ)',
+  //   'ヾ(⌐■_■)ノ♪'];
+    listOfOption = [
+      '😀',
+      '🤣',
+      '😍',
+      '🍕',
+      '😔',
+      '🤔',
+      '😴',
+      '🧠',
+      '💩',
+      '🤯',
+      '😱',
+      '💀',
+      '🤬',
+      '😭'];
   listOfSelectedValue = [];
   //defaultOption = [...this.listOfSelectedValue];
   //selectedValue = 'Default';
@@ -95,6 +110,7 @@ export class MoviepageComponent implements OnInit {
       console.log(movie);
       console.log(this.movieBackdropImage);
       this.pageLoading = false;
+      window.scroll(0,0); //scroll to top of page only after movie is loaded
     });
 
     this.getListService.getRelatedMovies(movieId).subscribe((movies) => {
@@ -114,8 +130,6 @@ export class MoviepageComponent implements OnInit {
       } else {
         this.hasRelatedMovies = false;
       }
-
-      window.scroll(0,0); //scroll to top of page only after page is loaded
     });
   }
 

@@ -80,7 +80,6 @@ export class GetlistService {
           let newDescription = '';
           newDescription = localStorage.getItem(movie.id+'');
           movie.overview = newDescription;
-          console.log(movie);
         }
         
         return responseData.results;
