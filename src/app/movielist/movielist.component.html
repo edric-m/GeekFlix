@@ -9,28 +9,39 @@
     </nz-breadcrumb>
 </div>
 
-<div class="gutter-example center">
-    <div nz-row nzGutter="16">
-        <div *ngFor="let movie of movielist" nz-col class="gutter-row" nzSpan="6">
-            <div class="gutter-box">
-                <app-movieitem 
-                    [name]="movie.original_title" 
-                    [id]="movie.id"
-                    [description]="movie.overview" 
-                    [image]="movie.poster_path"
-                    (itemDelete)="removeMovie($event)">
-                </app-movieitem>
+<div *ngIf="pageLoading">
+    <nz-spin nzTip="Attempting to retrieve movies...">
+    </nz-spin>
+</div>
+<div *ngIf="!pageLoading">
+    <div class="gutter-example center">
+        <div nz-row nzGutter="16">
+            <div *ngFor="let movie of movielist" nz-col class="gutter-row" nzSpan="6">
+                <div class="gutter-box">
+                    <app-movieitem 
+                        [name]="movie.original_title" 
+                        [id]="movie.id"
+                        [description]="movie.overview" 
+                        [image]="movie.poster_path"
+                        (itemDelete)="removeMovie($event)">
+                    </app-movieitem>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="navigation">
-    <button nz-button nzType="default" (click)="loadMoreMovies()">More</button>
-    <!-- <nz-pagination 
-        [nzPageIndex]="currentPage" 
-        [nzPageSize]="20" 
-        [nzTotal]="totalResults"
-        (nzPageIndexChange)="getPage($event)"
-        nzShowQuickJumper>
-    </nz-pagination> -->
+    <div class="navigation">
+        <div *ngIf="loadingMore">
+            <nz-spin nzSimple></nz-spin>
+        </div>
+        <div *ngIf="!loadingMore">
+            <button nz-button nzType="default" (click)="loadMoreMovies()">More</button>
+        </div>
+        <!-- <nz-pagination 
+            [nzPageIndex]="currentPage" 
+            [nzPageSize]="20" 
+            [nzTotal]="totalResults"
+            (nzPageIndexChange)="getPage($event)"
+            nzShowQuickJumper>
+        </nz-pagination> -->
+    </div>
 </div>

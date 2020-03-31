@@ -19,10 +19,20 @@ export class MoviepageComponent implements OnInit {
   movieReleaseDate: string;
   removedMovies: number[] = [];
   hasRelatedMovies: boolean;
+  pageLoading: boolean = true;
  
   listOfOption = [
-    'ಠ_ಠ','¯\_(ツ)_/¯','( ͡° ͜ʖ ͡°)','(╯°□°）╯︵ ┻━┻','ლ(ಠ益ಠ)ლ','(｡◕‿◕｡)','(ಥ﹏ಥ)','༼ つ ◕_◕ ༽つ',
-    '(ง ͠° ͟ل͜ ͡°)ง','(づ￣ ³￣)づ','♥‿♥','(>ლ)','ヾ(⌐■_■)ノ♪','≧☉_☉≦'];
+    '(｡◕‿◕｡)',
+    '(ಥ﹏ಥ)',
+    '♥‿♥',
+    'ლ(ಠ益ಠ)ლ',
+    '༼ つ◕.◕ ༽つ',
+    'ಠ_ಠ',
+    '¯\\_(ツ)_/¯',
+    '(╯°□°）╯︵ ┻━┻',
+    '(づ￣ ³￣)づ',
+    '(>ლ)',
+    'ヾ(⌐■_■)ノ♪'];
   listOfSelectedValue = [];
   //defaultOption = [...this.listOfSelectedValue];
   //selectedValue = 'Default';
@@ -42,7 +52,7 @@ export class MoviepageComponent implements OnInit {
     //   this.removedMovies = temp;
     // }
 
-    //TODO: issue when the 'removed' key has no value - doesn't load any related
+    //TODO: is try block needed?
     try{
       this.removedMovies = JSON.parse(localStorage.getItem('removed'));
       this.removedMovies.includes(0);
@@ -84,6 +94,7 @@ export class MoviepageComponent implements OnInit {
       }
       console.log(movie);
       console.log(this.movieBackdropImage);
+      this.pageLoading = false;
     });
 
     this.getListService.getRelatedMovies(movieId).subscribe((movies) => {

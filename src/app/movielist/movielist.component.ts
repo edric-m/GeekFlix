@@ -24,6 +24,8 @@ export class MovielistComponent implements OnInit {
   currentPage: number = 1;
   totalResults: number = 1;
   removedMovies: number[] = []; //not bounded
+  pageLoading: boolean = true;
+  loadingMore: boolean = false;
 
   constructor(private getListService: GetlistService) { }
 
@@ -64,6 +66,9 @@ export class MovielistComponent implements OnInit {
       }
       //this.movielist.push(filteredList); 
       //this.movielist = movies.results;
+
+      this.pageLoading = false;
+      this.loadingMore = false;
     });
 
     this.currentPage = page;
@@ -95,6 +100,7 @@ export class MovielistComponent implements OnInit {
   }
 
   loadMoreMovies() {
+    this.loadingMore = true;
     this.getPage(this.currentPage + 1);
   }
 }

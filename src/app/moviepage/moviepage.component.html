@@ -17,25 +17,32 @@
     <div class="center">
 
         <nz-card class="content">
-            <div class="poster-container">
-                <img class="poster" alt="example" [src]="imagePrefix + movieImage" />
+            <div *ngIf="pageLoading">
+                <nz-spin nzTip="Loading...">
+                </nz-spin>
             </div>
-    
-            <h1 class="title" nz-title>{{ movieTitle + movieReleaseDate }}</h1>
+            <div *ngIf="!pageLoading">
+                <div class="poster-container">
+                    <img class="poster" alt="example" [src]="imagePrefix + movieImage" />
+                </div>
+        
+                <h1 class="title" nz-title>{{ movieTitle + movieReleaseDate }}</h1>
+                
+                <h3>Overview</h3>
+                <div class="movie-description">
+                    <p>{{ movieDescription }}</p>
+                </div>
+        
+                <h3>Rating</h3>
+                <nz-select 
+                    nzMode="multiple" 
+                    nzPlaceHolder="select emotions" 
+                    [(ngModel)]="listOfSelectedValue" 
+                    (ngModelChange)="emotionAdded()">
+                    <nz-option *ngFor="let option of listOfOption" [nzLabel]="option" [nzValue]="option"></nz-option>
+                </nz-select>
+            </div>
             
-            <h3>Overview</h3>
-            <div class="movie-description">
-                <p>{{ movieDescription }}</p>
-            </div>
-    
-            <h3>Rating</h3>
-            <nz-select 
-                nzMode="multiple" 
-                nzPlaceHolder="select emotions" 
-                [(ngModel)]="listOfSelectedValue" 
-                (ngModelChange)="emotionAdded()">
-                <nz-option *ngFor="let option of listOfOption" [nzLabel]="option" [nzValue]="option"></nz-option>
-            </nz-select>
     
         </nz-card>
     </div>
