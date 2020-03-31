@@ -43,7 +43,12 @@ export class MoviepageComponent implements OnInit {
     // }
 
     //TODO: issue when the 'removed' key has no value - doesn't load any related
-    this.removedMovies = JSON.parse(localStorage.getItem('removed'));
+    try{
+      this.removedMovies = JSON.parse(localStorage.getItem('removed'));
+      this.removedMovies.includes(0);
+    } catch {
+      this.removedMovies = [];
+    }
     this.route.params
       .subscribe( //this is used when the user clicks on a related movie
         (params: Params) => {
@@ -83,9 +88,11 @@ export class MoviepageComponent implements OnInit {
 
     this.getListService.getRelatedMovies(movieId).subscribe((movies) => {
       let filteredMovies = [];
-      for(let movie of movies) {
-        if(!this.removedMovies.includes(movie.id)) {
-          filteredMovies.push(movie);
+      if(this.removedMovies != null) {
+        for(let movie of movies) {
+          if(!this.removedMovies.includes(movie.id)) {
+            filteredMovies.push(movie);
+          }
         }
       }
       this.relatedMovies = filteredMovies;
@@ -105,19 +112,22 @@ export class MoviepageComponent implements OnInit {
   deleteMovie(id: number) {
     if(localStorage.getItem('removed') === null) {
       localStorage.setItem('removed', JSON.stringify([id]));
+
+      this.removedMovies = [id];
     }
     else {
       let removedItems = JSON.parse(localStorage.getItem('removed'));
       removedItems.push(id); //TODO: this pushes duplicates when it shouldnt
       localStorage.setItem('removed', JSON.stringify(removedItems));
 
-      let newList = [];
-      for(let movie of this.relatedMovies) {
-        if(movie.id != id) {
-          newList.push(movie);
-        }
-      }
-      this.relatedMovies = newList;
     }
+    let newList = [];
+    for(let movie of this.relatedMovies) {
+      if(movie.id != id) {
+        newList.push(movie);
+      }
+    }
+
+    this.relatedMovies = newList;
   }
 }

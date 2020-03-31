@@ -89,7 +89,9 @@ describe('MoviepageComponent', () => {
       poster_path: 'fakePosterPath', 
       id: 0, 
       original_title: 'fakeTitle_0', 
-      overview: 'fakeOverview' 
+      overview: 'fakeOverview',
+      backdrop_path: 'fakeBackdropPath',
+      release_date: '0000-00-00' 
     });
   }));
   

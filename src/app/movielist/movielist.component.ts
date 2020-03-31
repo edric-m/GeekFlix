@@ -72,20 +72,21 @@ export class MovielistComponent implements OnInit {
   removeMovie(id:number) { //TODO: make this function a service or something
     if(localStorage.getItem('removed') === null) {
       localStorage.setItem('removed', JSON.stringify([id]));
+      this.removedMovies = [id];
     }
     else {
       let removedItems = JSON.parse(localStorage.getItem('removed'));
       removedItems.push(id); //TODO: this pushes duplicates when it shouldnt
       localStorage.setItem('removed', JSON.stringify(removedItems));
 
-      let newList = [];
-      for(let movie of this.movielist) {
-        if(movie.id != id) {
-          newList.push(movie);
-        }
-      }
-      this.movielist = newList;
     }
+    let newList = [];
+    for(let movie of this.movielist) {
+      if(movie.id != id) {
+        newList.push(movie);
+      }
+    }
+    this.movielist = newList;
 
     //this.getPage(this.currentPage);
     //this.ngOnInit();
