@@ -79,6 +79,9 @@ export class GetlistService {
         for(let movie of responseData.results){
           let newDescription = '';
           newDescription = localStorage.getItem(movie.id+'');
+          if(newDescription === null) {
+            newDescription = '';
+          }
           movie.overview = newDescription;
         }
         

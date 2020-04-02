@@ -80,10 +80,12 @@ nz-spin {
 
 .related-title {
     margin-right: 20px;
+    color: rgba(24,144,255,0.7);
 }
 
 button {
     margin-top: 8px;
+    opacity: 0.8;
 }
 
 .main-movie {

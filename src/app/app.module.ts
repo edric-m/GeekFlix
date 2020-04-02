@@ -14,11 +14,13 @@ import en from '@angular/common/locales/en';
 import { Routes, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { UserlistComponent } from './userlist/userlist.component';
 
 const appRoutes: Routes = [
   { path: '', component : MovielistComponent }, //how to make default path with the right url?
   { path: 'movies', component: MovielistComponent },
-  { path: 'movie/:id/:name', component: MoviepageComponent }
+  { path: 'movie/:id/:name', component: MoviepageComponent },
+  { path: 'userlist', component: UserlistComponent }
 ];
 
 registerLocaleData(en);
@@ -28,7 +30,8 @@ registerLocaleData(en);
     AppComponent,
     MovielistComponent,
     MovieitemComponent,
-    MoviepageComponent
+    MoviepageComponent,
+    UserlistComponent
   ],
   imports: [
     BrowserModule,

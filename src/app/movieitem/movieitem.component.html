@@ -5,7 +5,7 @@
     (mouseenter)="hasMouseFocus(true)"
     (mouseleave)="hasMouseFocus(false)">
     <nz-card-meta [nzTitle]="name" 
-        [nzDescription]="description | slice:0:70" 
+        [nzDescription]="(description | slice:0:67) + '...'" 
         (click)="itemClick()">
     </nz-card-meta>
 </nz-card>

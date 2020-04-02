@@ -1,6 +1,6 @@
 nz-card {
     height: 100%;/* 560px;*/
-    /* font-size: 1.1vw; */
+    font-size: 1.1vw;
 }
 /* TODO: fix the row height to a constant value */
 
@@ -10,5 +10,6 @@ nz-card {
 
 .drag-image {
     max-width: 150px;
+    opacity: 0.9;
     /* max-height: 100px; */
 }
