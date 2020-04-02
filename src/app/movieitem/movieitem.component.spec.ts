@@ -34,6 +34,11 @@ describe('MovieitemComponent', () => {
     expect(component.hovered).toBe(true);
   });
 
+  xit('should be dragable', ()=> {
+    //--assemble 
+
+  });
+
   //test case when image not loaded that it should fill the same space and replace image
 
   //test case when title not loaded it should fill the same space

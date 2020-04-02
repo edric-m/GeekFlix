@@ -65,10 +65,27 @@ nz-card {
 .related-movie-section{
     width: 97%;
     margin: auto;
+    margin-top: 2%;
     text-align: left;
 }
 
 nz-spin {
     padding-top: 200px;
     padding-bottom: 200px;
+}
+
+.pagination {
+    display: flex;
+}
+
+.related-title {
+    margin-right: 20px;
+}
+
+button {
+    margin-top: 8px;
+}
+
+.main-movie {
+    margin: 2%;
 }

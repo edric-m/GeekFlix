@@ -13,6 +13,7 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { Routes, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 const appRoutes: Routes = [
   { path: '', component : MovielistComponent }, //how to make default path with the right url?
@@ -36,6 +37,7 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
+    DragDropModule,
     FontAwesomeModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],

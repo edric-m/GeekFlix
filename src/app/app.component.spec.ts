@@ -24,6 +24,8 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('GeekFlix');
   });
 
+  //it should not forget which movies have been loaded and should remember page location upon return
+
   // it('should render title', () => {
   //   const fixture = TestBed.createComponent(AppComponent);
   //   fixture.detectChanges();

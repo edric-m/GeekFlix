@@ -6,15 +6,18 @@
 
 nz-content {
     background-color: white;
+    background-image: linear-gradient(white, rgb(253, 253, 253));
 }
 
 nz-footer {
     background-color: white;
+    background-image: linear-gradient(rgb(253, 253, 253),rgb(245, 245, 245));
 }
 
 nz-header {
     /*background-color: rgb(0, 131, 253);*/
     background-color: white;
+    border-bottom: 1px solid rgba(24,144,255,0.7);
 }
 
 .logo-image {

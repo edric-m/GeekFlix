@@ -16,7 +16,7 @@
     style="background-image: url({{imagePrefix + movieBackdropImage}});">
     <div class="center">
 
-        <nz-card class="content">
+        <nz-card class="content main-movie">
             <div *ngIf="pageLoading">
                 <nz-spin nzTip="Loading...">
                 </nz-spin>
@@ -28,12 +28,12 @@
         
                 <h1 class="title" nz-title>{{ movieTitle + movieReleaseDate }}</h1>
                 
-                <h3>Overview</h3>
+                <h4 nz-title>Overview</h4>
                 <div class="movie-description">
                     <p>{{ movieDescription }}</p>
                 </div>
         
-                <h3>Rating</h3>
+                <h4 nz-title>Rating</h4>
                 <nz-select 
                     nzMode="multiple" 
                     nzSize="large"
@@ -51,10 +51,17 @@
 
 <div class="related-movie-section center">
     <div *ngIf="hasRelatedMovies">
-        <h2 nz-title class="related_title" #thenBlock>Similar Movies</h2>
+        <div class="pagination">
+            <h1 class="related-title title" nz-title #thenBlock>Similar Movies</h1>
+            <nz-button-group nzSize="medium">
+                <button nz-button nzType="primary" (click)="getPrevPage()"><i nz-icon nzType="left"></i>Prev</button>
+                <button nz-button nzType="primary" (click)="getPage()">Next<i nz-icon nzType="right"></i></button>
+            </nz-button-group>
+        </div>
     </div> 
-    <h2 nz-title class="related_title" #elseBlock></h2>
-    <div *ngFor="let movie of relatedMovies | slice:0:6" nz-col class="gutter-row" nzSpan="4">
+    <h2 class="related_title" #elseBlock></h2>
+    
+    <div *ngFor="let movie of relatedMoviesPage | slice:0:6" nz-col class="gutter-row" nzSpan="4">
         <div class="gutter-box">
             <app-movieitem 
                 [name]="movie.original_title" 
@@ -65,5 +72,5 @@
             </app-movieitem>
         </div>
     </div>
-
+    
 </div>

@@ -20,6 +20,8 @@ export class MoviepageComponent implements OnInit {
   removedMovies: number[] = [];
   hasRelatedMovies: boolean;
   pageLoading: boolean = true;
+  relatedMoviesPage: Movie[];
+  currentPage: number;
  
   // listOfOption = [
   //   '(｡◕‿◕｡)',
@@ -67,7 +69,7 @@ export class MoviepageComponent implements OnInit {
     //   this.removedMovies = temp;
     // }
 
-    //TODO: is try block needed?
+    //TODO: create a service for localStorage
     try{
       this.removedMovies = JSON.parse(localStorage.getItem('removed'));
       this.removedMovies.includes(0);
@@ -130,7 +132,27 @@ export class MoviepageComponent implements OnInit {
       } else {
         this.hasRelatedMovies = false;
       }
+      this.currentPage = 1;
+      this.relatedMoviesPage = [...this.relatedMovies];
     });
+  }
+
+  getPage() {
+    let tempList = [...this.relatedMoviesPage]; //clone array by value. [] = [] is by refrence
+    
+      let temp = tempList.shift();
+      tempList.push(temp);
+    
+    this.relatedMoviesPage = [...tempList];
+  }
+
+  getPrevPage() {
+    let tempList = [...this.relatedMoviesPage]; //clone array by value. [] = [] is by refrence
+    
+      let temp = tempList.pop();
+      tempList.unshift(temp);
+    
+    this.relatedMoviesPage = [...tempList];
   }
 
   //TODO: this function is duplicate code
@@ -147,12 +169,13 @@ export class MoviepageComponent implements OnInit {
 
     }
     let newList = [];
-    for(let movie of this.relatedMovies) {
+    for(let movie of this.relatedMoviesPage) {
       if(movie.id != id) {
         newList.push(movie);
       }
     }
 
-    this.relatedMovies = newList;
+    //this.relatedMovies = newList;
+    this.relatedMoviesPage = newList;//[...this.relatedMovies];
   }
 }

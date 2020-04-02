@@ -4,12 +4,27 @@
     [nzExtra]="extraTemplate"
     (mouseenter)="hasMouseFocus(true)"
     (mouseleave)="hasMouseFocus(false)">
-    <nz-card-meta [nzTitle]="name" [nzDescription]="description | slice:0:70" (click)="itemClick()"></nz-card-meta>
+    <nz-card-meta [nzTitle]="name" 
+        [nzDescription]="description | slice:0:70" 
+        (click)="itemClick()">
+    </nz-card-meta>
 </nz-card>
 <ng-template #coverTemplate>
     <img alt="example" [src]="imagePrefix + imageFile" (click)="itemClick()"/>
 </ng-template>
 <ng-template #extraTemplate>
+    <div class="drag-handle" cdkDropList>
+        <div cdkDrag>
+            <div [style.visibility]="hovered ? 'visible' : 'hidden'" cdkDragHandle>
+                <img class="drag-image" *cdkDragPreview [src]="imagePrefix + imageFile" [alt]="name">
+                <svg width="24px" fill="rgba(24,144,255,0.7)" viewBox="0 0 24 24">
+                    <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+                    <path d="M0 0h24v24H0z" fill="none"></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+
     <a [style.visibility]="hovered ? 'visible' : 'hidden'"
         nz-popconfirm nzPopconfirmTitle="Permanently delete '{{ name }}' from your list?" 
         [nzIcon]="iconTpl"

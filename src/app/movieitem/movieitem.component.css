@@ -3,3 +3,12 @@ nz-card {
     /* font-size: 1.1vw; */
 }
 /* TODO: fix the row height to a constant value */
+
+.drag-handle {
+    float: left;
+}
+
+.drag-image {
+    max-width: 150px;
+    /* max-height: 100px; */
+}
