@@ -24,6 +24,12 @@ nz-header {
     max-height: 27px;
 }
 
+#user-list-button {
+    position: fixed;
+    bottom: 2%;
+    right: 8%; 
+}
+
 /*
 .logo {
     width: 120px;

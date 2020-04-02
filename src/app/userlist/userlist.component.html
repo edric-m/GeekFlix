@@ -1,1 +1,41 @@
-<p>userlist works!</p>
+
+<div class="breadcrum">
+    <nz-breadcrumb>
+        <nz-breadcrumb-item>
+            <a routerLink="../../../movies">Home</a>
+        </nz-breadcrumb-item>
+        <nz-breadcrumb-item>
+            {{ userName }}'s Lists
+        </nz-breadcrumb-item>
+    </nz-breadcrumb>
+</div>
+<nz-affix nzOffsetBottom="0">
+    <div class="user-list-select">
+        <nz-select 
+            nzMode="multiple" 
+            nzSize="large"
+            nzPlaceHolder="filter by emojis" 
+            [(ngModel)]="listOfSelectedValue" 
+            (ngModelChange)="emotionAdded()">
+            <nz-option *ngFor="let option of listOfOption" [nzLabel]="option" [nzValue]="option"></nz-option>
+        </nz-select>
+    </div>
+</nz-affix>
+<div *ngIf="!hasData">
+    <p class="center default-view">Pick a filter to get started</p>
+</div>
+<div *ngIf="hasData">
+    <div class="selected-user-list center">
+        <div *ngFor="let movie of movieList" nz-col class="gutter-row" nzSpan="6">
+            <div class="gutter-box">
+                <app-movieitem 
+                    [name]="movie.original_title" 
+                    [id]="movie.id"
+                    [description]="movie.overview" 
+                    [image]="movie.poster_path"
+                    (itemDelete)="deleteMovie($event)">
+                </app-movieitem>
+            </div>
+        </div>
+    </div>
+</div>

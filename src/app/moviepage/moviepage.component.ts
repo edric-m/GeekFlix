@@ -10,6 +10,7 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./moviepage.component.css']
 })
 export class MoviepageComponent implements OnInit {
+  movieId: number;
   movieTitle: string;
   movieDescription: string;
   movieImage: string;
@@ -90,6 +91,19 @@ export class MoviepageComponent implements OnInit {
     let emotions = [];
     for(let emotion of this.listOfSelectedValue) {
       emotions.push(emotion);
+
+      let emoId = this.listOfOption.indexOf(emotion);
+      let emoList = localStorage.getItem('emoji'+emoId);
+      if(emoList === null) {
+        localStorage.setItem('emoji'+emoId, JSON.stringify([this.movieId]));
+      } else {
+        let x = localStorage.getItem('emoji'+emoId);
+        let x2 = JSON.parse(x);
+        x2.push(this.movieId);
+        console.log(x2);
+        localStorage.setItem('emoji'+emoId, JSON.stringify(x2));
+      }
+
     }
     //console.log(JSON.parse(JSON.stringify(emotions)));
 
@@ -101,6 +115,7 @@ export class MoviepageComponent implements OnInit {
   getMovie(movieId: number) {
     this.getListService.getMoviePage(movieId).subscribe((movie) => {
       this.movieReleaseDate = ' (' + movie.release_date.substring(0,4) + ')';
+      this.movieId = movie.id;
       this.movieTitle = movie.original_title;
       this.movieDescription = movie.overview;
       this.movieImage = movie.poster_path;
