@@ -9,10 +9,11 @@
         </nz-breadcrumb-item>
     </nz-breadcrumb>
 </div>
+<!--nzMode for nz-select should ideally be "multiple"-->
 <nz-affix nzOffsetBottom="0">
     <div class="user-list-select">
         <nz-select 
-            nzMode="multiple" 
+            nzMode="multiple"
             nzSize="large"
             nzPlaceHolder="filter by emojis" 
             [(ngModel)]="listOfSelectedValue" 
