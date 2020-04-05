@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { GetlistService } from './getlist.service';
-import { Movie } from './movie.model';
+import { Movie } from '../models/movie.model';
 
 // Http testing module and mocking controller
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
@@ -44,6 +44,8 @@ describe('GetlistService', () => {
       id: 1,
       original_title: 'string',
       overview: 'string',
+      backdrop_path: 'string',
+      release_date: 'string'
     }]};
 
     // Make an HTTP GET request

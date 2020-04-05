@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GetlistService } from '../getlist.service';
-import { Movie } from '../movie.model';
+import { GetlistService } from '../services/getlist.service';
+import { Movie } from '../models/movie.model';
 //import { NzResultServerErrorComponent } from 'ng-zorro-antd/result/partial/server-error.component';
 //import { Observable } from 'rxjs';
 //import fakeListResponseData from '../fakeList.data';

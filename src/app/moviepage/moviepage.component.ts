@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Movie } from '../movie.model';
-import { GetlistService } from '../getlist.service';
+import { Movie } from '../models/movie.model';
+import { GetlistService } from '../services/getlist.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 

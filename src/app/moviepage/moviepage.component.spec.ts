@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MoviepageComponent } from './moviepage.component';
-import { GetlistService } from '../getlist.service';
+import { GetlistService } from '../services/getlist.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from "@angular/router/testing";
 import { defer } from 'rxjs';

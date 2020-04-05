@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MovielistComponent } from './movielist.component';
-import { GetlistService } from '../getlist.service';
+import { GetlistService } from '../services/getlist.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { defer, of } from 'rxjs';
 //import { ignoreElements } from 'rxjs/operators';
